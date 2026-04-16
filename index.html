@@ -4,111 +4,57 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>UTTAYANSUKSAKRABI · ค่ายเมล็ดพันธุ์ใหม่ 2026</title>
-    <!-- Tailwind + Google Fonts -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=Kanit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&family=Kanit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        body {
-            font-family: 'Inter', 'Kanit', system-ui, -apple-system, sans-serif;
-            background: #0a0a0e;
-            color: #fff;
-            overflow-x: hidden;
-        }
-        /* พื้นหลัง dynamic slider */
-        .bg-slider {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-            overflow: hidden;
-        }
-        .slide-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-size: cover;
-            background-position: center;
-            opacity: 0;
-            transition: opacity 1.8s cubic-bezier(0.25, 0.8, 0.25, 1);
-            filter: brightness(0.35) saturate(1.1);
-        }
-        .slide-bg.active {
-            opacity: 1;
-            z-index: 1;
-        }
-        .gradient-overlay {
-            position: absolute;
-            inset: 0;
-            background: radial-gradient(circle at 20% 30%, rgba(255, 180, 220, 0.25), rgba(0, 150, 255, 0.2), rgba(0,0,0,0.7));
-            z-index: 2;
-            pointer-events: none;
-        }
-        /* ผีเสื้อขาวลอยงาม */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', 'Kanit', sans-serif; background: #0a0a0e; color: #fff; overflow-x: hidden; }
+        
+        /* พื้นหลัง slider สวยงาม */
+        .bg-slider { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; overflow: hidden; }
+        .slide-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-size: cover; background-position: center; opacity: 0; transition: opacity 1.8s cubic-bezier(0.25, 0.8, 0.25, 1); filter: brightness(0.35) saturate(1.1); }
+        .slide-bg.active { opacity: 1; z-index: 1; }
+        .gradient-overlay { position: absolute; inset: 0; background: radial-gradient(circle at 20% 30%, rgba(255,180,220,0.25), rgba(0,150,255,0.2), rgba(0,0,0,0.7)); z-index: 2; pointer-events: none; }
+        
+        /* ผีเสื้อขาว - ลดเหลือ 3 ตัวเท่านั้น */
         .butterfly {
             position: fixed;
-            width: 42px;
-            height: 42px;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath fill='white' opacity='0.85' d='M50,25 C35,10 10,15 12,35 C14,50 28,58 38,52 C30,65 18,78 24,88 C30,96 45,88 50,78 C55,88 70,96 76,88 C82,78 70,65 62,52 C72,58 86,50 88,35 C90,15 65,10 50,25Z'/%3E%3C/svg%3E");
+            width: 38px;
+            height: 38px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath fill='white' opacity='0.75' d='M50,25 C35,10 10,15 12,35 C14,50 28,58 38,52 C30,65 18,78 24,88 C30,96 45,88 50,78 C55,88 70,96 76,88 C82,78 70,65 62,52 C72,58 86,50 88,35 C90,15 65,10 50,25Z'/%3E%3C/svg%3E");
             background-size: contain;
             background-repeat: no-repeat;
             pointer-events: none;
             z-index: 60;
-            filter: drop-shadow(0 0 6px rgba(255,255,200,0.6));
+            filter: drop-shadow(0 0 5px rgba(255,255,200,0.4));
             animation: floatButterfly 22s infinite alternate ease-in-out;
-            opacity: 0.7;
-            transition: transform 0.2s;
+            opacity: 0.55;
         }
         @keyframes floatButterfly {
             0% { transform: translate(0, 0) rotate(0deg) scale(1); }
-            25% { transform: translate(12vw, -8vh) rotate(8deg) scale(1.05); }
-            50% { transform: translate(25vw, 5vh) rotate(-5deg) scale(0.98); }
-            75% { transform: translate(8vw, 12vh) rotate(12deg) scale(1.02); }
+            30% { transform: translate(12vw, -7vh) rotate(6deg) scale(1.03); }
+            60% { transform: translate(18vw, 5vh) rotate(-5deg) scale(0.98); }
             100% { transform: translate(0, 0) rotate(0deg) scale(1); }
         }
-        @keyframes softGlow {
-            0% { text-shadow: 0 0 2px rgba(255,160,210,0.5);}
-            100% { text-shadow: 0 0 15px rgba(120,200,255,0.8);}
-        }
-        .glow-pink {
-            animation: softGlow 2.5s infinite alternate;
-        }
+        
         /* การ์ดนับถอยหลัง */
         .countdown-card {
             background: rgba(255, 245, 250, 0.1);
             backdrop-filter: blur(16px);
-            border-radius: 2rem;
+            border-radius: 1.75rem;
             border: 1px solid rgba(255, 200, 230, 0.4);
             transition: all 0.25s ease-out;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
         }
-        .countdown-card:hover {
-            transform: translateY(-5px);
-            background: rgba(255, 200, 230, 0.2);
-            border-color: rgba(255, 150, 210, 0.7);
-            box-shadow: 0 18px 35px -12px rgba(255,105,180,0.3);
-        }
-        /* ปุ่ม CTA */
+        .countdown-card:hover { transform: translateY(-4px); background: rgba(255, 200, 230, 0.2); border-color: rgba(255, 150, 210, 0.7); }
+        
+        /* ปุ่มสไตล์พาสเทล */
         .btn-pastel {
             background: linear-gradient(135deg, #ffb3d9, #80d4ff);
-            border: none;
             border-radius: 60px;
             transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
             box-shadow: 0 6px 14px rgba(255, 120, 180, 0.3);
         }
-        .btn-pastel:hover {
-            transform: scale(1.02);
-            box-shadow: 0 14px 28px rgba(255, 100, 170, 0.5);
-            background: linear-gradient(135deg, #ffc0e0, #90e0ff);
-        }
+        .btn-pastel:hover { transform: scale(1.02); box-shadow: 0 14px 28px rgba(255, 100, 170, 0.5); background: linear-gradient(135deg, #ffc0e0, #90e0ff); }
         .btn-outline-pink {
             border-radius: 60px;
             background: rgba(255, 210, 230, 0.12);
@@ -116,51 +62,23 @@
             border: 1px solid rgba(255, 160, 200, 0.7);
             transition: all 0.25s;
         }
-        .btn-outline-pink:hover {
-            background: rgba(255, 180, 210, 0.25);
-            border-color: #ffb3d9;
-            transform: scale(1.01);
-        }
+        .btn-outline-pink:hover { background: rgba(255, 180, 210, 0.25); border-color: #ffb3d9; transform: scale(1.01); }
+        
         /* โมดอล */
-        .modal-glass {
-            background: rgba(15, 10, 20, 0.85);
-            backdrop-filter: blur(28px);
-            border-radius: 2.5rem;
-            border: 1px solid rgba(255, 180, 220, 0.5);
-        }
-        .schedule-item {
-            background: rgba(255, 220, 240, 0.05);
-            border-radius: 1.5rem;
-            border-left: 3px solid #ff99cc;
-        }
-        @keyframes fadeSlideUp {
-            0% { opacity: 0; transform: translateY(35px); filter: blur(5px);}
-            100% { opacity: 1; transform: translateY(0); filter: blur(0);}
-        }
-        .animate-fade-up {
-            animation: fadeSlideUp 1s cubic-bezier(0.12, 0.75, 0.3, 1) forwards;
-        }
+        .modal-glass { background: rgba(15, 10, 20, 0.92); backdrop-filter: blur(28px); border-radius: 2rem; border: 1px solid rgba(255, 180, 220, 0.5); }
+        .schedule-item { background: rgba(255, 220, 240, 0.05); border-radius: 1.25rem; border-left: 3px solid #ff99cc; }
+        
+        /* อนิเมชัน */
+        @keyframes fadeSlideUp { from { opacity: 0; transform: translateY(30px); filter: blur(5px);} to { opacity: 1; transform: translateY(0); filter: blur(0);} }
+        .animate-fade-up { animation: fadeSlideUp 0.9s cubic-bezier(0.12, 0.75, 0.3, 1) forwards; }
         .delay-100 { animation-delay: 0.1s; }
         .delay-200 { animation-delay: 0.2s; }
         .delay-300 { animation-delay: 0.3s; }
         .delay-400 { animation-delay: 0.4s; }
         .delay-500 { animation-delay: 0.5s; }
-        ::-webkit-scrollbar {
-            width: 5px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #1e1a24;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #ff99cc;
-            border-radius: 10px;
-        }
-        .text-gradient-pink {
-            background: linear-gradient(135deg, #FFC0E8, #8EC8FF);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
+        
+        .text-gradient-pink { background: linear-gradient(135deg, #FFC0E8, #8EC8FF); -webkit-background-clip: text; background-clip: text; color: transparent; }
+        
         /* ปุ่มเสียง */
         .music-toggle {
             position: fixed;
@@ -170,166 +88,208 @@
             background: rgba(255, 220, 240, 0.2);
             backdrop-filter: blur(12px);
             border-radius: 60px;
-            padding: 12px 18px;
+            padding: 8px 18px;
             border: 1px solid rgba(255, 180, 210, 0.6);
             cursor: pointer;
             transition: all 0.2s;
             display: flex;
             align-items: center;
             gap: 8px;
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 500;
             color: #ffd9f0;
         }
-        .music-toggle:hover {
-            background: rgba(255, 180, 210, 0.35);
-            transform: scale(1.03);
-            border-color: #ff99cc;
+        .music-toggle:hover { background: rgba(255, 180, 210, 0.35); transform: scale(1.02); }
+        @keyframes soundWave { 0% { opacity: 0.5; transform: scale(0.95);} 100% { opacity: 1; transform: scale(1.08);} }
+        .music-icon-playing { animation: soundWave 1s infinite alternate; }
+        
+        /* ช่องทางติดตามโซเชียล */
+        .social-icon {
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(4px);
+            border-radius: 40px;
+            padding: 6px 16px;
+            border: 0.5px solid rgba(255, 200, 220, 0.3);
+            font-size: 12px;
+            font-weight: 500;
         }
-        @keyframes soundWave {
-            0% { opacity: 0.4; transform: scale(0.9);}
-            100% { opacity: 1; transform: scale(1.1);}
-        }
-        .music-icon-playing {
-            animation: soundWave 1s infinite alternate;
-        }
+        .social-icon:hover { background: rgba(255, 180, 210, 0.2); transform: translateY(-2px); border-color: #ff99cc; }
+        
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-track { background: #1e1a24; }
+        ::-webkit-scrollbar-thumb { background: #ff99cc; border-radius: 10px; }
     </style>
 </head>
 <body>
 
-    <!-- Background Slider ภาพสวย เปลี่ยนอัตโนมัติ -->
+    <!-- พื้นหลัง slider ภาพสวย -->
     <div class="bg-slider" id="bgSlider">
         <div class="slide-bg active" style="background-image: url('https://images.pexels.com/photos/236047/pexels-photo-236047.jpeg?auto=compress&cs=tinysrgb&w=1600');"></div>
         <div class="slide-bg" style="background-image: url('https://images.pexels.com/photos/1037992/spring-nature-beauty-flowers-forest-1037992.jpeg?auto=compress&cs=tinysrgb&w=1600');"></div>
         <div class="slide-bg" style="background-image: url('https://images.pexels.com/photos/1261728/forest-sunlight-trees-nature-1261728.jpeg?auto=compress&cs=tinysrgb&w=1600');"></div>
         <div class="slide-bg" style="background-image: url('https://images.pexels.com/photos/158028/bellingrath-gardens-flowers-garden-nature-158028.jpeg?auto=compress&cs=tinysrgb&w=1600');"></div>
-        <div class="slide-bg" style="background-image: url('https://images.pexels.com/photos/257360/pexels-photo-257360.jpeg?auto=compress&cs=tinysrgb&w=1600');"></div>
         <div class="gradient-overlay"></div>
     </div>
 
-    <!-- ผีเสื้อขาวบินสวยงาม -->
+    <!-- ผีเสื้อขาว แค่ 3 ตัวเท่านั้น -->
     <div id="butterflyContainer"></div>
 
-    <!-- ปุ่มควบคุมเสียง + ดนตรีเบาๆ (lo-fi / ambient) -->
+    <!-- ปุ่มเปิด/ปิดเพลง -->
     <div class="music-toggle" id="musicToggle">
         <span id="musicIcon">🎵</span>
         <span id="musicText">เปิดเพลง</span>
     </div>
 
-    <main class="relative z-20 min-h-screen flex flex-col items-center justify-center px-6 py-20 text-center">
-        <div class="max-w-6xl mx-auto w-full">
-            <!-- badge สีชมพูฟ้า -->
-            <div class="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-pink-300/40 text-pink-200 text-sm font-semibold tracking-wide mb-10 animate-fade-up">
-                <span class="w-2 h-2 rounded-full bg-pink-400"></span>
+    <!-- เนื้อหาหลัก -->
+    <main class="relative z-20 min-h-screen flex flex-col items-center justify-center px-5 py-14 text-center">
+        <div class="max-w-5xl mx-auto w-full">
+            <!-- badge ด้านบน -->
+            <div class="inline-flex items-center gap-2 px-5 py-1.5 rounded-full bg-white/10 backdrop-blur-sm border border-pink-300/40 text-pink-200 text-xs md:text-sm font-semibold tracking-wide mb-8 animate-fade-up">
+                <span class="w-1.5 h-1.5 rounded-full bg-pink-400"></span>
                 UTTAYANSUKSAKRABI SCHOOL • CAMP 2026
-                <span class="w-2 h-2 rounded-full bg-sky-400"></span>
+                <span class="w-1.5 h-1.5 rounded-full bg-sky-400"></span>
             </div>
 
-            <!-- โลโก้ trio -->
-            <div class="flex flex-row justify-center items-center gap-6 md:gap-12 mb-12 animate-fade-up delay-100">
-                <img src="https://i.postimg.cc/WztgWSpc/IMG-7790.png" alt="logo1" class="h-16 md:h-24 w-auto drop-shadow-xl brightness-0 invert-[0.9]">
-                <span class="text-3xl font-thin text-pink-300/70">✧</span>
-                <img src="https://i.postimg.cc/mZqHZY27/IMG-8562.png" alt="logo2" class="h-16 md:h-24 w-auto drop-shadow-xl brightness-0 invert-[0.9]">
-                <span class="text-3xl font-thin text-pink-300/70">✧</span>
-                <img src="https://i.postimg.cc/rpQDBWPp/U.png" alt="logo3" class="h-16 md:h-24 w-auto drop-shadow-xl brightness-0 invert-[0.9]">
+            <!-- โลโก้ 3 ตัว -->
+            <div class="flex flex-row justify-center items-center gap-5 md:gap-10 mb-10 animate-fade-up delay-100">
+                <img src="https://i.postimg.cc/WztgWSpc/IMG-7790.png" alt="logo1" class="h-14 md:h-20 w-auto drop-shadow-xl brightness-0 invert-[0.9]">
+                <span class="text-2xl font-thin text-pink-300/60">✧</span>
+                <img src="https://i.postimg.cc/mZqHZY27/IMG-8562.png" alt="logo2" class="h-14 md:h-20 w-auto drop-shadow-xl brightness-0 invert-[0.9]">
+                <span class="text-2xl font-thin text-pink-300/60">✧</span>
+                <img src="https://i.postimg.cc/rpQDBWPp/U.png" alt="logo3" class="h-14 md:h-20 w-auto drop-shadow-xl brightness-0 invert-[0.9]">
             </div>
 
-            <!-- หัวข้อหลัก -->
-            <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight mb-5 animate-fade-up delay-200">
+            <!-- หัวข้อหลัก สมดุลตัวอักษร -->
+            <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight mb-4 animate-fade-up delay-200 leading-tight">
                 <span class="text-gradient-pink">ค่ายเมล็ดพันธุ์ใหม่</span><br>
                 <span class="text-white">หัวใจอุทยานฯ</span>
             </h1>
 
-            <p class="text-xl md:text-2xl text-gray-200 font-medium max-w-2xl mx-auto mb-3 animate-fade-up delay-200">
+            <!-- วันที่และสถานที่ -->
+            <p class="text-xl md:text-2xl text-gray-200 font-medium max-w-2xl mx-auto mb-2 animate-fade-up delay-200">
                 <span class="border-b-2 border-pink-400 pb-1">18 พฤษภาคม 2569</span>
             </p>
             <div class="flex justify-center gap-2 text-pink-200 text-base md:text-lg animate-fade-up delay-300">
                 <span>📍</span> โรงเรียนอุทยานศึกษากระบี่
             </div>
 
-            <!-- countdown -->
-            <div class="grid grid-cols-4 gap-3 sm:gap-5 max-w-3xl mx-auto my-16 animate-fade-up delay-300">
-                <div class="countdown-card py-6 rounded-2xl shadow-2xl">
-                    <span id="days" class="text-5xl md:text-7xl font-black text-pink-200 block">00</span>
-                    <span class="text-[11px] uppercase font-bold text-pink-300/90 tracking-widest mt-2 block">วัน</span>
+            <!-- ตัวนับถอยหลัง สมดุล -->
+            <div class="grid grid-cols-4 gap-3 sm:gap-5 max-w-2xl mx-auto my-14 animate-fade-up delay-300">
+                <div class="countdown-card py-5 rounded-2xl">
+                    <span id="days" class="text-4xl md:text-6xl font-black text-pink-200 block">00</span>
+                    <span class="text-[10px] uppercase font-bold text-pink-300/90 tracking-wider mt-1 block">วัน</span>
                 </div>
-                <div class="countdown-card py-6 rounded-2xl">
-                    <span id="hours" class="text-5xl md:text-7xl font-black text-sky-200 block">00</span>
-                    <span class="text-[11px] uppercase font-bold text-sky-300/90 tracking-widest mt-2 block">ชั่วโมง</span>
+                <div class="countdown-card py-5 rounded-2xl">
+                    <span id="hours" class="text-4xl md:text-6xl font-black text-sky-200 block">00</span>
+                    <span class="text-[10px] uppercase font-bold text-sky-300/90 tracking-wider mt-1 block">ชั่วโมง</span>
                 </div>
-                <div class="countdown-card py-6 rounded-2xl">
-                    <span id="minutes" class="text-5xl md:text-7xl font-black text-pink-200 block">00</span>
-                    <span class="text-[11px] uppercase font-bold text-pink-300/90 tracking-widest mt-2 block">นาที</span>
+                <div class="countdown-card py-5 rounded-2xl">
+                    <span id="minutes" class="text-4xl md:text-6xl font-black text-pink-200 block">00</span>
+                    <span class="text-[10px] uppercase font-bold text-pink-300/90 tracking-wider mt-1 block">นาที</span>
                 </div>
-                <div class="countdown-card py-6 rounded-2xl bg-gradient-to-br from-pink-500/20 to-sky-500/20 border-pink-400/50">
-                    <span id="seconds" class="text-5xl md:text-7xl font-black text-white block">00</span>
-                    <span class="text-[11px] uppercase font-bold text-pink-200 tracking-widest mt-2 block">วินาที</span>
+                <div class="countdown-card py-5 rounded-2xl bg-gradient-to-br from-pink-500/20 to-sky-500/20 border-pink-400/50">
+                    <span id="seconds" class="text-4xl md:text-6xl font-black text-white block">00</span>
+                    <span class="text-[10px] uppercase font-bold text-pink-200 tracking-wider mt-1 block">วินาที</span>
                 </div>
             </div>
 
-            <!-- ปุ่ม action -->
-            <div class="flex flex-col sm:flex-row justify-center gap-5 animate-fade-up delay-400">
-                <button onclick="toggleModal()" class="btn-pastel px-8 py-4 text-black font-bold text-lg md:text-xl tracking-wide w-full sm:w-auto shadow-xl flex items-center justify-center gap-2">
+            <!-- ปุ่มหลัก 2 ปุ่ม -->
+            <div class="flex flex-col sm:flex-row justify-center gap-4 animate-fade-up delay-400">
+                <button onclick="toggleModal()" class="btn-pastel px-7 py-3.5 text-black font-bold text-base md:text-lg tracking-wide w-full sm:w-auto shadow-xl flex items-center justify-center gap-2">
                     <span>📋</span> กำหนดการและข้อมูลสำคัญ
                 </button>
-                <a href="#" id="downloadBtn" class="btn-outline-pink px-7 py-4 text-pink-100 font-semibold text-lg flex items-center justify-center gap-2 w-full sm:w-auto backdrop-blur-sm">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+                <a href="#" id="downloadBtn" class="btn-outline-pink px-6 py-3.5 text-pink-100 font-semibold text-base md:text-lg flex items-center justify-center gap-2 w-full sm:w-auto">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    </svg>
                     ดาวน์โหลดรูปภาพ
                 </a>
             </div>
-            <p class="text-xs text-pink-200/50 mt-10 animate-fade-up delay-500">✨ กดดูรายละเอียดกิจกรรม พร้อมเสียงเพลงบรรยากาศ ✨</p>
+            <p class="text-[11px] text-pink-200/50 mt-8 animate-fade-up delay-500 tracking-wide">✨ กดดูรายละเอียดกิจกรรม พร้อมเสียงเพลงบรรยากาศ ✨</p>
         </div>
     </main>
 
-    <!-- Modal ดีเทล -->
+    <!-- Modal กำหนดการ -->
     <div id="eventModal" class="fixed inset-0 flex items-end md:items-center justify-center p-4 z-[100] transition-all duration-500 invisible opacity-0" style="backdrop-filter: blur(0px);">
         <div class="absolute inset-0 bg-black/60 transition-opacity duration-300" onclick="toggleModal()"></div>
         <div class="relative modal-glass max-w-lg w-full mx-auto overflow-hidden shadow-2xl transform transition-all duration-300 translate-y-10 scale-95">
-            <div class="p-6 md:p-8">
+            <div class="p-6 md:p-7">
                 <div class="flex justify-between items-start">
                     <div class="flex gap-2">
-                        <img src="https://i.postimg.cc/WztgWSpc/IMG-7790.png" class="h-10 w-auto brightness-0 invert opacity-80">
-                        <img src="https://i.postimg.cc/mZqHZY27/IMG-8562.png" class="h-10 w-auto brightness-0 invert opacity-80">
-                        <img src="https://i.postimg.cc/rpQDBWPp/U.png" class="h-10 w-auto brightness-0 invert opacity-80">
+                        <img src="https://i.postimg.cc/WztgWSpc/IMG-7790.png" class="h-8 w-auto brightness-0 invert opacity-80">
+                        <img src="https://i.postimg.cc/mZqHZY27/IMG-8562.png" class="h-8 w-auto brightness-0 invert opacity-80">
+                        <img src="https://i.postimg.cc/rpQDBWPp/U.png" class="h-8 w-auto brightness-0 invert opacity-80">
                     </div>
                     <button onclick="toggleModal()" class="text-3xl text-pink-300 leading-6 hover:text-white">&times;</button>
                 </div>
-                <h2 class="text-3xl font-extrabold mt-3 bg-gradient-to-r from-pink-300 to-sky-300 bg-clip-text text-transparent">Event Details</h2>
-                <p class="text-gray-300 text-sm mb-5">ข้อมูลสำคัญ และไทม์ไลน์ค่าย</p>
+                <h2 class="text-2xl md:text-3xl font-extrabold mt-2 bg-gradient-to-r from-pink-300 to-sky-300 bg-clip-text text-transparent">Event Details</h2>
+                <p class="text-gray-300 text-xs mb-5">ข้อมูลสำคัญ และไทม์ไลน์ค่าย</p>
 
-                <div class="flex items-start gap-3 mb-6">
-                    <div class="w-10 h-10 rounded-full bg-pink-500/20 flex items-center justify-center text-xl">📍</div>
-                    <div><p class="text-xs font-bold text-pink-300 uppercase">สถานที่</p><p class="text-white font-medium">โรงเรียนอุทยานศึกษากระบี่</p></div>
+                <div class="flex items-start gap-3 mb-5">
+                    <div class="w-9 h-9 rounded-full bg-pink-500/20 flex items-center justify-center text-lg">📍</div>
+                    <div><p class="text-[10px] font-bold text-pink-300 uppercase">สถานที่</p><p class="text-white text-sm font-medium">โรงเรียนอุทยานศึกษากระบี่</p></div>
                 </div>
-                <div class="mb-7">
-                    <div class="flex items-center gap-2 mb-3"><span class="text-sky-300 text-sm">📅</span><p class="text-xs font-bold text-sky-300 uppercase">กำหนดการ</p></div>
-                    <div class="space-y-3">
-                        <div class="schedule-item p-3 flex justify-between flex-wrap"><span class="text-pink-200 font-mono">09:00 — 10:00</span><span class="text-white">ลงทะเบียน ตรวจสอบรายชื่อ</span></div>
-                        <div class="schedule-item p-3 flex justify-between flex-wrap"><span class="text-pink-200 font-mono">10:00 — 12:00</span><span class="text-white">นำสัมภาระไปเก็บ / พักเบรก</span></div>
-                        <div class="schedule-item p-3 flex justify-between flex-wrap"><span class="text-pink-200 font-mono">13:00 — 15:00</span><span class="text-white font-medium">พิธีเปิดโดย บาบอปรีชา พยายาม</span></div>
-                        <div class="schedule-item p-3 flex justify-between flex-wrap"><span class="text-pink-200 font-mono">15:30 — 17:30</span><span class="text-white">Workshop “สร้างแรงบันดาลใจ”</span></div>
-                        <div class="schedule-item p-3 flex justify-between flex-wrap"><span class="text-pink-200 font-mono">19:00 — 21:00</span><span class="text-white">เปิดบ้านค่าย & กิจกรรมกลุ่ม</span></div>
+
+                <div class="mb-6">
+                    <div class="flex items-center gap-2 mb-2"><span class="text-sky-300 text-xs">📅</span><p class="text-[10px] font-bold text-sky-300 uppercase">กำหนดการ</p></div>
+                    <div class="space-y-2 text-sm">
+                        <div class="schedule-item p-3 flex justify-between flex-wrap items-center"><span class="text-pink-200 text-xs font-mono">09:00 — 10:00</span><span class="text-white text-sm">ลงทะเบียน ตรวจสอบรายชื่อ</span></div>
+                        <div class="schedule-item p-3 flex justify-between flex-wrap items-center"><span class="text-pink-200 text-xs font-mono">10:00 — 12:00</span><span class="text-white text-sm">นำสัมภาระไปเก็บ / พักเบรก</span></div>
+                        <div class="schedule-item p-3 flex justify-between flex-wrap items-center"><span class="text-pink-200 text-xs font-mono">13:00 — 15:00</span><span class="text-white text-sm font-medium">พิธีเปิดโดย บาบอปรีชา พยายาม</span></div>
+                        <div class="schedule-item p-3 flex justify-between flex-wrap items-center"><span class="text-pink-200 text-xs font-mono">15:30 — 17:30</span><span class="text-white text-sm">Workshop “สร้างแรงบันดาลใจ”</span></div>
+                        <div class="schedule-item p-3 flex justify-between flex-wrap items-center"><span class="text-pink-200 text-xs font-mono">19:00 — 21:00</span><span class="text-white text-sm">เปิดบ้านค่าย & กิจกรรมกลุ่ม</span></div>
                     </div>
                 </div>
-                <div class="bg-white/10 rounded-2xl p-3 text-xs text-gray-200 border border-pink-500/20 mb-5">
+
+                <div class="bg-white/10 rounded-xl p-3 text-xs text-gray-200 border border-pink-500/20 mb-5">
                     📌 สิ่งที่ต้องเตรียม: ชุดสุภาพ, เสื้อค่าย (รับ当日), อุปกรณ์นั่งพื้น, รอยยิ้มสดใส
                 </div>
-                <button onclick="toggleModal()" class="w-full py-3 bg-gradient-to-r from-pink-500 to-sky-500 text-white font-bold rounded-full text-base hover:shadow-xl transition">เข้าใจแล้ว</button>
+                <button onclick="toggleModal()" class="w-full py-2.5 bg-gradient-to-r from-pink-500 to-sky-500 text-white font-bold rounded-full text-sm hover:shadow-xl transition">เข้าใจแล้ว</button>
             </div>
         </div>
     </div>
 
-    <footer class="relative z-20 py-14 text-center border-t border-pink-500/20 bg-black/30 backdrop-blur-sm mt-20">
-        <div class="max-w-3xl mx-auto px-6">
-            <p class="text-gray-400 text-[11px] tracking-[0.3em] uppercase mb-3">จัดทำโดย</p>
-            <p class="text-white font-semibold text-lg">คณะกรรมการสภานักเรียนโรงเรียนอุทยานศึกษากระบี่</p>
+    <!-- Footer + ช่องทางติดตามโซเชียลครบ -->
+    <footer class="relative z-20 py-10 text-center border-t border-pink-500/20 bg-black/30 backdrop-blur-sm mt-8">
+        <div class="max-w-4xl mx-auto px-5">
+            <p class="text-gray-400 text-[10px] tracking-[0.2em] uppercase mb-4">ติดตามความเคลื่อนไหว</p>
+            
+            <!-- ช่องทางโซเชียลมีเดีย: FB 2 เพจ, IG, TikTok, YouTube -->
+            <div class="flex flex-wrap justify-center gap-3 mb-8">
+                <a href="#" target="_blank" class="social-icon text-pink-200">
+                    <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c5.05-.5 9-4.76 9-9.95z"/></svg>
+                    อุทยานศึกษากระบี่
+                </a>
+                <a href="#" target="_blank" class="social-icon text-pink-200">
+                    <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c5.05-.5 9-4.76 9-9.95z"/></svg>
+                    ค่ายเมล็ดพันธุ์ใหม่
+                </a>
+                <a href="#" target="_blank" class="social-icon text-pink-200">
+                    <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2m-.2 2A3.6 3.6 0 0 0 4 7.6v8.8C4 18.5 5.5 20 7.6 20h8.8a3.6 3.6 0 0 0 3.6-3.6V7.6C20 5.5 18.5 4 16.4 4H7.6m9.65 1.5a1.5 1.5 0 0 1 1.5 1.5 1.5 1.5 0 0 1-1.5 1.5 1.5 1.5 0 0 1-1.5-1.5 1.5 1.5 0 0 1 1.5-1.5M12 7c2.76 0 5 2.24 5 5s-2.24 5-5 5-5-2.24-5-5 2.24-5 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3z"/></svg>
+                    uttayan.camp
+                </a>
+                <a href="#" target="_blank" class="social-icon text-pink-200">
+                    <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.87-4.53 2.89 2.89 0 0 1 2.07 1.08V6.69h3.45v.75a8.3 8.3 0 0 0 7.03 4.25v-3.45a4.83 4.83 0 0 1-3.77-1.65z"/></svg>
+                    @uttayan_camp
+                </a>
+                <a href="#" target="_blank" class="social-icon text-pink-200">
+                    <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M10 15l5.19-3L10 9v6m11.56-7.83c.13.47.22 1.1.28 1.9.07.8.1 1.49.1 2.09L22 12c0 2.19-.16 3.8-.44 4.83-.25.9-.83 1.48-1.73 1.73-.47.13-1.33.22-2.65.28-1.3.07-2.49.1-3.59.1L12 19c-2.19 0-3.8-.16-4.83-.44-.9-.25-1.48-.83-1.73-1.73-.13-.47-.22-1.1-.28-1.9-.07-.8-.1-1.49-.1-2.09L5 12c0-2.19.16-3.8.44-4.83.25-.9.83-1.48 1.73-1.73.47-.13 1.33-.22 2.65-.28 1.3-.07 2.49-.1 3.59-.1L12 5c2.19 0 3.8.16 4.83.44.9.25 1.48.83 1.73 1.73z"/></svg>
+                    UTTAYAN OFFICIAL
+                </a>
+            </div>
+
             <div class="w-12 h-px bg-gradient-to-r from-pink-400 to-sky-400 mx-auto my-4"></div>
-            <p class="text-[10px] text-pink-300/70 font-mono">UTTAYANSUKSAKRABI SCHOOL · CAMP 2026</p>
+            <p class="text-gray-400 text-[9px] tracking-wider">คณะกรรมการสภานักเรียน โรงเรียนอุทยานศึกษากระบี่</p>
+            <p class="text-[9px] text-pink-400/60 mt-1 tracking-wide">UTTAYANSUKSAKRABI SCHOOL · CAMP 2026</p>
         </div>
     </footer>
 
     <script>
-        // ========== BACKGROUND SLIDER ==========
+        // ========== SLIDER ภาพพื้นหลัง ==========
         const slides = document.querySelectorAll('.slide-bg');
         let currentSlide = 0;
         function nextBackground() {
@@ -339,199 +299,40 @@
         }
         setInterval(nextBackground, 6000);
 
-        // ========== ผีเสื้อขาวลอย ==========
+        // ========== ผีเสื้อขาว แค่ 3 ตัว ==========
         const butterflyContainer = document.getElementById('butterflyContainer');
         function createButterfly() {
             const butterfly = document.createElement('div');
             butterfly.classList.add('butterfly');
-            const size = 30 + Math.random() * 35;
+            const size = 32 + Math.random() * 28;
             butterfly.style.width = `${size}px`;
             butterfly.style.height = `${size}px`;
-            butterfly.style.left = `${Math.random() * 85}vw`;
-            butterfly.style.top = `${Math.random() * 85}vh`;
-            const duration = 18 + Math.random() * 20;
-            const delay = Math.random() * 10;
+            butterfly.style.left = `${Math.random() * 80}vw`;
+            butterfly.style.top = `${Math.random() * 80}vh`;
+            const duration = 20 + Math.random() * 18;
+            const delay = Math.random() * 8;
             butterfly.style.animation = `floatButterfly ${duration}s infinite alternate ease-in-out`;
             butterfly.style.animationDelay = `${delay}s`;
-            butterfly.style.opacity = 0.5 + Math.random() * 0.4;
+            butterfly.style.opacity = 0.5 + Math.random() * 0.3;
             butterflyContainer.appendChild(butterfly);
+            // ขยับนิดหน่อย
             setInterval(() => {
                 if(butterfly && butterfly.style) {
                     let left = parseFloat(butterfly.style.left);
                     let top = parseFloat(butterfly.style.top);
-                    left += (Math.random() - 0.5) * 1.2;
-                    top += (Math.random() - 0.5) * 1.2;
-                    left = Math.min(Math.max(left, -5), 90);
-                    top = Math.min(Math.max(top, -5), 85);
+                    left += (Math.random() - 0.5) * 0.8;
+                    top += (Math.random() - 0.5) * 0.8;
+                    left = Math.min(Math.max(left, -2), 88);
+                    top = Math.min(Math.max(top, -2), 85);
                     butterfly.style.left = `${left}vw`;
                     butterfly.style.top = `${top}vh`;
                 }
-            }, 3800);
+            }, 4500);
         }
-        for(let i=0;i<9;i++) createButterfly();
+        // สร้างแค่ 3 ตัว (ลดจำนวนผีเสื้อ)
+        for(let i = 0; i < 3; i++) createButterfly();
 
-        // ========== MUSIC (Ambient Lo-fi เบาๆ) ==========
-        // สร้าง AudioContext สำหรับเสียงที่เบาและปลอดภัย (ผู้ใช้ต้องคลิกเปิดก่อน)
-        let audioContext = null;
-        let isPlaying = false;
-        let gainNode = null;
-        let oscillator = null;
-        let musicInterval = null;
-        
-        // ฟังก์ชันสร้างเสียง ambient เบาๆ คล้ายดนตรีธรรมชาติ (ใช้ oscillator + noise เบา)
-        function startAmbientMusic() {
-            if (audioContext && isPlaying) return;
-            
-            try {
-                if (!audioContext) {
-                    audioContext = new (window.AudioContext || window.webkitAudioContext)();
-                }
-                
-                // ปลุก AudioContext ถ้ามัน suspended
-                if (audioContext.state === 'suspended') {
-                    audioContext.resume();
-                }
-                
-                gainNode = audioContext.createGain();
-                gainNode.gain.value = 0.15; // เบามาก
-                gainNode.connect(audioContext.destination);
-                
-                // สร้างเสียงพื้นฐาน soft pad (ใช้ oscillator + filter)
-                const osc1 = audioContext.createOscillator();
-                const osc2 = audioContext.createOscillator();
-                const filter = audioContext.createBiquadFilter();
-                const gainOsc = audioContext.createGain();
-                
-                osc1.type = 'sine';
-                osc1.frequency.value = 261.63; // C4
-                osc2.type = 'sine';
-                osc2.frequency.value = 329.63; // E4
-                
-                filter.type = 'lowpass';
-                filter.frequency.value = 800;
-                filter.Q.value = 5;
-                
-                gainOsc.gain.value = 0.08;
-                
-                osc1.connect(filter);
-                osc2.connect(filter);
-                filter.connect(gainOsc);
-                gainOsc.connect(gainNode);
-                
-                osc1.start();
-                osc2.start();
-                
-                // เล่น LFO สลับเบาๆ
-                let lfoGain = 0.08;
-                let lfoDirection = 0.002;
-                const lfoInterval = setInterval(() => {
-                    if (!isPlaying) return;
-                    lfoGain += lfoDirection;
-                    if (lfoGain >= 0.12) lfoDirection = -0.002;
-                    if (lfoGain <= 0.05) lfoDirection = 0.002;
-                    if (gainOsc) gainOsc.gain.value = lfoGain;
-                }, 800);
-                
-                // สร้างเสียง background noise เบาๆ (white noise + filter)
-                const bufferSize = 4096;
-                const noiseNode = audioContext.createScriptProcessor(bufferSize, 1, 1);
-                const noiseGain = audioContext.createGain();
-                noiseGain.gain.value = 0.02;
-                const noiseFilter = audioContext.createBiquadFilter();
-                noiseFilter.type = 'lowpass';
-                noiseFilter.frequency.value = 800;
-                
-                noiseNode.onaudioprocess = function(e) {
-                    if (!isPlaying) return;
-                    const output = e.outputBuffer.getChannelData(0);
-                    for (let i = 0; i < bufferSize; i++) {
-                        output[i] = (Math.random() * 2 - 1) * 0.08;
-                    }
-                };
-                noiseNode.connect(noiseFilter);
-                noiseFilter.connect(noiseGain);
-                noiseGain.connect(gainNode);
-                
-                // เก็บ oscillator และ interval เพื่อหยุดทีหลัง
-                window._activeOsc1 = osc1;
-                window._activeOsc2 = osc2;
-                window._lfoInterval = lfoInterval;
-                window._noiseNode = noiseNode;
-                
-                isPlaying = true;
-                updateMusicUI(true);
-            } catch(e) {
-                console.log("Audio not supported or need user interaction");
-            }
-        }
-        
-        function stopAmbientMusic() {
-            if (!isPlaying) return;
-            try {
-                if (window._activeOsc1) {
-                    window._activeOsc1.stop();
-                    window._activeOsc1 = null;
-                }
-                if (window._activeOsc2) {
-                    window._activeOsc2.stop();
-                    window._activeOsc2 = null;
-                }
-                if (window._lfoInterval) {
-                    clearInterval(window._lfoInterval);
-                    window._lfoInterval = null;
-                }
-                if (window._noiseNode) {
-                    window._noiseNode.disconnect();
-                    window._noiseNode = null;
-                }
-                if (gainNode) {
-                    gainNode.gain.value = 0;
-                    gainNode.disconnect();
-                }
-                if (audioContext) {
-                    audioContext.close().catch(e=>{});
-                    audioContext = null;
-                }
-                isPlaying = false;
-                updateMusicUI(false);
-            } catch(e) {}
-        }
-        
-        function updateMusicUI(playing) {
-            const iconSpan = document.getElementById('musicIcon');
-            const textSpan = document.getElementById('musicText');
-            const toggleDiv = document.getElementById('musicToggle');
-            if (playing) {
-                iconSpan.innerHTML = '🎶';
-                textSpan.innerText = 'ปิดเพลง';
-                toggleDiv.classList.add('music-icon-playing');
-            } else {
-                iconSpan.innerHTML = '🎵';
-                textSpan.innerText = 'เปิดเพลง';
-                toggleDiv.classList.remove('music-icon-playing');
-            }
-        }
-        
-        // Toggle music เมื่อคลิกปุ่ม
-        const musicToggleBtn = document.getElementById('musicToggle');
-        musicToggleBtn.addEventListener('click', () => {
-            if (isPlaying) {
-                stopAmbientMusic();
-            } else {
-                startAmbientMusic();
-            }
-        });
-        
-        // เมื่อผู้ใช้โต้ตอบกับหน้า (คลิกที่ไหนก็ได้) ให้เริ่ม AudioContext ได้ แต่ไม่บังคับ auto-play (เพื่อ compliance)
-        function resumeAudioOnFirstInteraction() {
-            if (audioContext && audioContext.state === 'suspended') {
-                audioContext.resume();
-            }
-        }
-        document.body.addEventListener('click', resumeAudioOnFirstInteraction);
-        document.body.addEventListener('touchstart', resumeAudioOnFirstInteraction);
-        
-        // ========== MODAL CONTROL ==========
+        // ========== MODAL ==========
         const modal = document.getElementById('eventModal');
         function toggleModal() {
             const isActive = modal.classList.contains('active');
@@ -557,7 +358,12 @@
         const modalInner = modal.querySelector('.relative.modal-glass');
         if(modalInner) modalInner.style.transform = 'translateY(20px) scale(0.97)';
         
-        // COUNTDOWN
+        document.addEventListener('click', (e) => {
+            if(modal.classList.contains('active') && e.target === modal) toggleModal();
+        });
+        document.addEventListener('keydown', (e) => { if(e.key === 'Escape' && modal.classList.contains('active')) toggleModal(); });
+
+        // ========== COUNTDOWN 18 พฤษภาคม 2569 ==========
         const target = new Date(2026, 4, 18, 0, 0, 0).getTime();
         function updateCD() {
             const now = Date.now();
@@ -573,24 +379,21 @@
             const h = Math.floor((gap % 86400000) / 3600000);
             const m = Math.floor((gap % 3600000) / 60000);
             const s = Math.floor((gap % 60000) / 1000);
-            document.getElementById('days').innerText = d.toString().padStart(2,'0');
-            document.getElementById('hours').innerText = h.toString().padStart(2,'0');
-            document.getElementById('minutes').innerText = m.toString().padStart(2,'0');
-            document.getElementById('seconds').innerText = s.toString().padStart(2,'0');
+            document.getElementById('days').innerText = d.toString().padStart(2, '0');
+            document.getElementById('hours').innerText = h.toString().padStart(2, '0');
+            document.getElementById('minutes').innerText = m.toString().padStart(2, '0');
+            document.getElementById('seconds').innerText = s.toString().padStart(2, '0');
         }
         setInterval(updateCD, 1000);
         updateCD();
-        
+
+        // ========== DOWNLOAD BUTTON ==========
         const dlBtn = document.getElementById('downloadBtn');
         dlBtn?.addEventListener('click', (e) => {
             e.preventDefault();
             alert("🦋 คลังภาพค่ายเมล็ดพันธุ์ใหม่ กำลังจัดเตรียมให้ดาวน์โหลดเร็วๆ นี้ (18 พ.ค. 2026) ติดตามเพจโรงเรียน!");
         });
-        
-        document.addEventListener('click', (e) => {
-            if(modal.classList.contains('active') && e.target === modal) toggleModal();
-        });
-        document.addEventListener('keydown', (e) => { if(e.key === 'Escape' && modal.classList.contains('active')) toggleModal(); });
-    </script>
-</body>
-</html>
+
+        // ========== MUSIC SYSTEM (Ambient เบาๆ) ==========
+        let audioContext = null;
+       
