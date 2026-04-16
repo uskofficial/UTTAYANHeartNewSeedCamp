@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>School Event - Premium Edition</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        body { 
+            font-family: 'Kanit', sans-serif; 
+            background-color: #050505; 
+            color: #fff; 
+            margin: 0; 
+            overflow-x: hidden;
+        }
+        
+        .fade-in-up {
+            animation: fadeInUp 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(50px); filter: blur(10px); }
+            to { opacity: 1; transform: translateY(0); filter: blur(0); }
+        }
+
+        #eventModal {
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            visibility: hidden; opacity: 0; z-index: 100;
+        }
+        #eventModal.active {
+            visibility: visible; opacity: 1; backdrop-filter: blur(20px);
+        }
+
+        .cta-glow {
+            box-shadow: 0 0 25px rgba(59, 130, 246, 0.5);
+            transition: all 0.3s ease;
+        }
+        .cta-glow:hover {
+            box-shadow: 0 0 50px rgba(59, 130, 246, 0.8);
+            transform: translateY(-3px);
+        }
+    </style>
+</head>
+<body class="selection:bg-blue-600 selection:text-white">
+
+    <section class="relative min-h-screen flex flex-col items-center justify-center py-20 px-4 overflow-hidden text-center">
+        <div class="absolute inset-0 z-0">
+            <div class="absolute inset-0 bg-gradient-to-b from-blue-900/30 via-[#050505]/95 to-[#050505]"></div>
+            <img src="https://i.postimg.cc/5tBkm9jF/IMG-8802.png" 
+                 class="w-full h-full object-cover opacity-20" alt="Background">
+        </div>
+
+        <div class="relative z-20 w-full max-w-5xl fade-in-up px-2">
+            <span class="inline-block px-6 py-2 rounded-full border border-blue-500/40 bg-blue-500/20 text-blue-300 text-xs md:text-sm font-black tracking-[0.3em] mb-10 uppercase">
+                UTTAYANSUKSAKRABI SCHOOL
+            </span>
+            
+            <div class="flex flex-row justify-center items-center gap-4 md:gap-12 mb-12 select-none">
+                <img src="https://i.postimg.cc/WztgWSpc/IMG-7790.png" alt="Logo 1" class="w-16 md:w-32 h-16 md:h-32 object-contain drop-shadow-lg">
+                <div class="font-black text-white/30 text-xl md:text-4xl">×</div>
+                <img src="https://i.postimg.cc/mZqHZY27/IMG-8562.png" alt="Logo 2" class="w-16 md:w-32 h-16 md:h-32 object-contain drop-shadow-lg">
+                <div class="font-black text-white/30 text-xl md:text-4xl">×</div>
+                <img src="https://i.postimg.cc/rpQDBWPp/U.png" alt="Logo 3" class="w-16 md:w-32 h-16 md:h-32 object-contain drop-shadow-lg">
+            </div>
+
+            <h1 class="text-2xl md:text-5xl font-extrabold text-white mb-6 tracking-tight drop-shadow-xl">
+                ค่ายเมล็ดพันธุ์ใหม่หัวใจอุทยานฯ
+            </h1>
+
+            <p class="text-xl md:text-3xl font-bold text-gray-100 mb-16 leading-relaxed">
+                <span class="text-white border-b-4 border-blue-600 pb-2 inline-block mb-3">18 พฤษภาคม 2569</span> <br>
+                ณ โรงเรียนอุทยานศึกษากระบี่
+            </p>
+
+            <div class="flex flex-row justify-center items-center gap-3 md:gap-8 mb-16 w-full max-w-4xl mx-auto">
+                <div class="flex-1 max-w-[150px] bg-white/[0.05] border border-white/20 py-6 md:py-10 rounded-[2.5rem] shadow-2xl">
+                    <span id="days" class="text-3xl md:text-7xl font-extrabold block text-white">00</span>
+                    <p class="text-[10px] md:text-xs uppercase font-black text-gray-400 mt-2 tracking-widest">Days</p>
+                </div>
+                <div class="flex-1 max-w-[150px] bg-white/[0.05] border border-white/20 py-6 md:py-10 rounded-[2.5rem] shadow-2xl">
+                    <span id="hours" class="text-3xl md:text-7xl font-extrabold block text-white">00</span>
+                    <p class="text-[10px] md:text-xs uppercase font-black text-gray-400 mt-2 tracking-widest">Hours</p>
+                </div>
+                <div class="flex-1 max-w-[150px] bg-white/[0.05] border border-white/20 py-6 md:py-10 rounded-[2.5rem] shadow-2xl">
+                    <span id="minutes" class="text-3xl md:text-7xl font-extrabold block text-white">00</span>
+                    <p class="text-[10px] md:text-xs uppercase font-black text-gray-400 mt-2 tracking-widest">Mins</p>
+                </div>
+                <div class="flex-1 max-w-[150px] bg-blue-600/30 border border-blue-400/40 py-6 md:py-10 rounded-[2.5rem] shadow-2xl">
+                    <span id="seconds" class="text-3xl md:text-7xl font-extrabold block text-white">00</span>
+                    <p class="text-[10px] md:text-xs uppercase font-black text-blue-300 mt-2 tracking-widest">Secs</p>
+                </div>
+            </div>
+
+            <button onclick="toggleModal()" class="cta-glow bg-blue-600 text-white px-12 py-5 rounded-2xl font-black text-xl md:text-2xl uppercase tracking-widest transition-all">
+                กำหนดการและข้อมูลสำคัญ
+            </button>
+        </div>
+    </section>
+
+    <div id="eventModal" class="fixed inset-0 flex items-center justify-center p-4 bg-black/95">
+        <div class="bg-[#0c0c0c] border border-white/10 w-full max-w-[480px] rounded-[3rem] overflow-hidden shadow-2xl flex flex-col max-h-[90vh]">
+            <div class="bg-gradient-to-br from-blue-600 to-indigo-900 p-8 pb-12 relative shrink-0">
+                <div class="flex justify-center items-center gap-4 mb-6">
+                    <img src="https://i.postimg.cc/WztgWSpc/IMG-7790.png" alt="L1" class="h-10 w-10 md:h-12 md:w-12 object-contain">
+                    <img src="https://i.postimg.cc/mZqHZY27/IMG-8562.png" alt="L2" class="h-10 w-10 md:h-12 md:w-12 object-contain">
+                    <img src="https://i.postimg.cc/rpQDBWPp/U.png" alt="L3" class="h-10 w-10 md:h-12 md:w-12 object-contain">
+                </div>
+                <h2 class="text-3xl font-extrabold text-white mb-1 text-center">Event Details</h2>
+                <p class="text-blue-100/70 text-sm font-medium text-center">กำหนดการและข้อมูลสำคัญ</p>
+                <button onclick="toggleModal()" class="absolute top-6 right-6 text-white text-3xl">&times;</button>
+            </div>
+            
+            <div class="p-6 md:p-8 space-y-8 -mt-8 bg-[#0c0c0c] rounded-t-[2.5rem] relative z-10 overflow-y-auto text-left">
+                <div class="flex items-start gap-5">
+                    <div class="w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center shrink-0 border border-white/10 text-xl text-blue-400">📍</div>
+                    <div>
+                        <h4 class="text-blue-400 text-[10px] uppercase font-black mb-1">Location</h4>
+                        <p class="text-gray-100 text-lg font-bold">โรงเรียนอุทยานศึกษากระบี่</p>
+                    </div>
+                </div>
+
+                <div class="flex items-start gap-5">
+                    <div class="w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center shrink-0 border border-white/10 text-xl text-purple-400">📅</div>
+                    <div class="w-full">
+                        <h4 class="text-purple-400 text-[10px] uppercase font-black mb-4">Schedule</h4>
+                        <div class="space-y-3 font-bold">
+                            <div class="flex justify-between items-center bg-white/[0.04] p-4 rounded-2xl border border-white/5">
+                                <span class="text-blue-400 text-sm">09:00 — 10:00</span>
+                                <span class="text-gray-200 text-sm">ลงทะเบียนตรวจสอบรายชื่อ</span>
+                            </div>
+                            <div class="flex justify-between items-center bg-white/[0.04] p-4 rounded-2xl border border-white/5">
+                                <span class="text-blue-400 text-sm">10:00 — 12:00</span>
+                                <span class="text-gray-200 text-sm">นำสัมภาระไปเก็บให้เรียบร้อย</span>
+                            </div>
+                            <div class="flex justify-between items-start bg-white/[0.04] p-4 rounded-2xl border border-white/5">
+                                <span class="text-blue-400 text-sm mt-1">13:00 — 15:00</span>
+                                <span class="text-gray-200 text-sm text-right leading-relaxed">พิธีเปิดงานโดย บาบอปรีชา<br>พยายาม</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-gradient-to-r from-blue-600/10 to-indigo-600/10 border border-blue-500/20 p-5 rounded-[2rem] flex items-center gap-5">
+                    <div class="text-2xl shrink-0">💡</div>
+                    <p class="text-[13px] text-blue-100/90 font-black leading-relaxed">
+                        ขอบคุณสำหรับการตรวจสอบข้อมูลเพื่อเตรียมความพร้อม
+                    </p>
+                </div>
+
+                <button onclick="toggleModal()" class="w-full py-5 bg-white text-black rounded-[1.8rem] font-black text-lg hover:bg-blue-600 hover:text-white transition-all active:scale-95">
+                    เข้าใจแล้ว
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="py-20 text-center bg-[#050505] border-t border-white/5">
+        <div class="max-w-2xl mx-auto px-6 opacity-60 hover:opacity-100 transition-opacity">
+            <p class="text-gray-500 text-[10px] uppercase tracking-[0.8em] mb-4">Developed By</p>
+            <p class="text-xl font-extrabold text-white">คณะกรรมการสภานักเรียนโรงเรียนอุทยานศึกษากระบี่</p>
+            <p class="text-[10px] text-blue-500 mt-2 font-black uppercase tracking-widest">114/1 หมู่ 2 ตำบลคลองเขม้า อำเภอเหนือคลอง จังหวัดกระบี่ 81130 จำนวน 1 ชุด <br>ตามเวลาที่ปรากฏ ที่ส่งมาในครั้งนี้</p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleModal() {
+            const modal = document.getElementById('eventModal');
+            modal.classList.toggle('active');
+            document.body.style.overflow = modal.classList.contains('active') ? 'hidden' : 'auto';
+        }
+
+        // แก้ไขรูปแบบวันที่ให้นับเวลาได้จริง (ISO Format)
+        const targetDate = new Date("2026-04-19T00:00:00").getTime();
+
+        const updateCountdown = () => {
+            const now = new Date().getTime();
+            const gap = targetDate - now;
+
+            if (gap <= 0) {
+                document.querySelectorAll('#days, #hours, #minutes, #seconds').forEach(el => el.innerText = "00");
+                return;
+            }
+
+            const second = 1000, minute = second * 60, hour = minute * 60, day = hour * 24;
+            const d = Math.floor(gap / day), h = Math.floor((gap % day) / hour), m = Math.floor((gap % hour) / minute), s = Math.floor((gap % minute) / second);
+
+            document.getElementById('days').innerText = d.toString().padStart(2, '0');
+            document.getElementById('hours').innerText = h.toString().padStart(2, '0');
+            document.getElementById('minutes').innerText = m.toString().padStart(2, '0');
+            document.getElementById('seconds').innerText = s.toString().padStart(2, '0');
+        };
+
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+    </script>
+</body>
+</html>
