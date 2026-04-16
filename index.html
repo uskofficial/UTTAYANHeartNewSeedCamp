@@ -2,207 +2,595 @@
 <html lang="th">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>School Event - Premium Edition</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>UTTAYANSUKSAKRABI · ค่ายเมล็ดพันธุ์ใหม่ 2026</title>
+    <!-- Tailwind + Google Fonts -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=Kanit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        body { 
-            font-family: 'Kanit', sans-serif; 
-            background-color: #050505; 
-            color: #fff; 
-            margin: 0; 
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Inter', 'Kanit', system-ui, -apple-system, sans-serif;
+            background: #0a0a0e;
+            color: #fff;
             overflow-x: hidden;
         }
-        
-        .fade-in-up {
-            animation: fadeInUp 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+        /* พื้นหลัง dynamic slider */
+        .bg-slider {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
         }
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(50px); filter: blur(10px); }
-            to { opacity: 1; transform: translateY(0); filter: blur(0); }
+        .slide-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1.8s cubic-bezier(0.25, 0.8, 0.25, 1);
+            filter: brightness(0.35) saturate(1.1);
         }
-
-        #eventModal {
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            visibility: hidden; opacity: 0; z-index: 100;
+        .slide-bg.active {
+            opacity: 1;
+            z-index: 1;
         }
-        #eventModal.active {
-            visibility: visible; opacity: 1; backdrop-filter: blur(20px);
+        .gradient-overlay {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 20% 30%, rgba(255, 180, 220, 0.25), rgba(0, 150, 255, 0.2), rgba(0,0,0,0.7));
+            z-index: 2;
+            pointer-events: none;
         }
-
-        .cta-glow {
-            box-shadow: 0 0 25px rgba(59, 130, 246, 0.5);
-            transition: all 0.3s ease;
+        /* ผีเสื้อขาวลอยงาม */
+        .butterfly {
+            position: fixed;
+            width: 42px;
+            height: 42px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath fill='white' opacity='0.85' d='M50,25 C35,10 10,15 12,35 C14,50 28,58 38,52 C30,65 18,78 24,88 C30,96 45,88 50,78 C55,88 70,96 76,88 C82,78 70,65 62,52 C72,58 86,50 88,35 C90,15 65,10 50,25Z'/%3E%3C/svg%3E");
+            background-size: contain;
+            background-repeat: no-repeat;
+            pointer-events: none;
+            z-index: 60;
+            filter: drop-shadow(0 0 6px rgba(255,255,200,0.6));
+            animation: floatButterfly 22s infinite alternate ease-in-out;
+            opacity: 0.7;
+            transition: transform 0.2s;
         }
-        .cta-glow:hover {
-            box-shadow: 0 0 50px rgba(59, 130, 246, 0.8);
-            transform: translateY(-3px);
+        @keyframes floatButterfly {
+            0% { transform: translate(0, 0) rotate(0deg) scale(1); }
+            25% { transform: translate(12vw, -8vh) rotate(8deg) scale(1.05); }
+            50% { transform: translate(25vw, 5vh) rotate(-5deg) scale(0.98); }
+            75% { transform: translate(8vw, 12vh) rotate(12deg) scale(1.02); }
+            100% { transform: translate(0, 0) rotate(0deg) scale(1); }
         }
-        
-        /* สไตล์ปุ่มดาวน์โหลด */
-        .download-glow {
-            box-shadow: 0 0 15px rgba(168, 85, 247, 0.3);
-            transition: all 0.3s ease;
+        @keyframes softGlow {
+            0% { text-shadow: 0 0 2px rgba(255,160,210,0.5);}
+            100% { text-shadow: 0 0 15px rgba(120,200,255,0.8);}
         }
-        .download-glow:hover {
-            box-shadow: 0 0 35px rgba(168, 85, 247, 0.6);
-            transform: translateY(-3px);
+        .glow-pink {
+            animation: softGlow 2.5s infinite alternate;
+        }
+        /* การ์ดนับถอยหลัง */
+        .countdown-card {
+            background: rgba(255, 245, 250, 0.1);
+            backdrop-filter: blur(16px);
+            border-radius: 2rem;
+            border: 1px solid rgba(255, 200, 230, 0.4);
+            transition: all 0.25s ease-out;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+        .countdown-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 200, 230, 0.2);
+            border-color: rgba(255, 150, 210, 0.7);
+            box-shadow: 0 18px 35px -12px rgba(255,105,180,0.3);
+        }
+        /* ปุ่ม CTA */
+        .btn-pastel {
+            background: linear-gradient(135deg, #ffb3d9, #80d4ff);
+            border: none;
+            border-radius: 60px;
+            transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            box-shadow: 0 6px 14px rgba(255, 120, 180, 0.3);
+        }
+        .btn-pastel:hover {
+            transform: scale(1.02);
+            box-shadow: 0 14px 28px rgba(255, 100, 170, 0.5);
+            background: linear-gradient(135deg, #ffc0e0, #90e0ff);
+        }
+        .btn-outline-pink {
+            border-radius: 60px;
+            background: rgba(255, 210, 230, 0.12);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 160, 200, 0.7);
+            transition: all 0.25s;
+        }
+        .btn-outline-pink:hover {
+            background: rgba(255, 180, 210, 0.25);
+            border-color: #ffb3d9;
+            transform: scale(1.01);
+        }
+        /* โมดอล */
+        .modal-glass {
+            background: rgba(15, 10, 20, 0.85);
+            backdrop-filter: blur(28px);
+            border-radius: 2.5rem;
+            border: 1px solid rgba(255, 180, 220, 0.5);
+        }
+        .schedule-item {
+            background: rgba(255, 220, 240, 0.05);
+            border-radius: 1.5rem;
+            border-left: 3px solid #ff99cc;
+        }
+        @keyframes fadeSlideUp {
+            0% { opacity: 0; transform: translateY(35px); filter: blur(5px);}
+            100% { opacity: 1; transform: translateY(0); filter: blur(0);}
+        }
+        .animate-fade-up {
+            animation: fadeSlideUp 1s cubic-bezier(0.12, 0.75, 0.3, 1) forwards;
+        }
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
+        .delay-400 { animation-delay: 0.4s; }
+        .delay-500 { animation-delay: 0.5s; }
+        ::-webkit-scrollbar {
+            width: 5px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1e1a24;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #ff99cc;
+            border-radius: 10px;
+        }
+        .text-gradient-pink {
+            background: linear-gradient(135deg, #FFC0E8, #8EC8FF);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        /* ปุ่มเสียง */
+        .music-toggle {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            z-index: 1000;
+            background: rgba(255, 220, 240, 0.2);
+            backdrop-filter: blur(12px);
+            border-radius: 60px;
+            padding: 12px 18px;
+            border: 1px solid rgba(255, 180, 210, 0.6);
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            color: #ffd9f0;
+        }
+        .music-toggle:hover {
+            background: rgba(255, 180, 210, 0.35);
+            transform: scale(1.03);
+            border-color: #ff99cc;
+        }
+        @keyframes soundWave {
+            0% { opacity: 0.4; transform: scale(0.9);}
+            100% { opacity: 1; transform: scale(1.1);}
+        }
+        .music-icon-playing {
+            animation: soundWave 1s infinite alternate;
         }
     </style>
 </head>
-<body class="selection:bg-blue-600 selection:text-white">
+<body>
 
-    <section class="relative min-h-screen flex flex-col items-center justify-center py-20 px-4 overflow-hidden text-center">
-        <div class="absolute inset-0 z-0">
-            <div class="absolute inset-0 bg-gradient-to-b from-blue-900/30 via-[#050505]/95 to-[#050505]"></div>
-            <img src="https://i.postimg.cc/5tBkm9jF/IMG-8802.png" 
-                 class="w-full h-full object-cover opacity-20" alt="Background">
-        </div>
+    <!-- Background Slider ภาพสวย เปลี่ยนอัตโนมัติ -->
+    <div class="bg-slider" id="bgSlider">
+        <div class="slide-bg active" style="background-image: url('https://images.pexels.com/photos/236047/pexels-photo-236047.jpeg?auto=compress&cs=tinysrgb&w=1600');"></div>
+        <div class="slide-bg" style="background-image: url('https://images.pexels.com/photos/1037992/spring-nature-beauty-flowers-forest-1037992.jpeg?auto=compress&cs=tinysrgb&w=1600');"></div>
+        <div class="slide-bg" style="background-image: url('https://images.pexels.com/photos/1261728/forest-sunlight-trees-nature-1261728.jpeg?auto=compress&cs=tinysrgb&w=1600');"></div>
+        <div class="slide-bg" style="background-image: url('https://images.pexels.com/photos/158028/bellingrath-gardens-flowers-garden-nature-158028.jpeg?auto=compress&cs=tinysrgb&w=1600');"></div>
+        <div class="slide-bg" style="background-image: url('https://images.pexels.com/photos/257360/pexels-photo-257360.jpeg?auto=compress&cs=tinysrgb&w=1600');"></div>
+        <div class="gradient-overlay"></div>
+    </div>
 
-        <div class="relative z-20 w-full max-w-5xl fade-in-up px-2">
-            <span class="inline-block px-6 py-2 rounded-full border border-blue-500/40 bg-blue-500/10 text-blue-300 text-xs md:text-sm font-black tracking-[0.3em] mb-10 uppercase">
-                UTTAYANSUKSAKRABI SCHOOL
-            </span>
-            
-            <div class="flex flex-row justify-center items-center gap-4 md:gap-12 mb-12 select-none">
-                <img src="https://i.postimg.cc/WztgWSpc/IMG-7790.png" alt="Logo 1" class="w-16 md:w-32 h-16 md:h-32 object-contain drop-shadow-lg">
-                <div class="font-black text-white/30 text-xl md:text-4xl">×</div>
-                <img src="https://i.postimg.cc/mZqHZY27/IMG-8562.png" alt="Logo 2" class="w-16 md:w-32 h-16 md:h-32 object-contain drop-shadow-lg">
-                <div class="font-black text-white/30 text-xl md:text-4xl">×</div>
-                <img src="https://i.postimg.cc/rpQDBWPp/U.png" alt="Logo 3" class="w-16 md:w-32 h-16 md:h-32 object-contain drop-shadow-lg">
+    <!-- ผีเสื้อขาวบินสวยงาม -->
+    <div id="butterflyContainer"></div>
+
+    <!-- ปุ่มควบคุมเสียง + ดนตรีเบาๆ (lo-fi / ambient) -->
+    <div class="music-toggle" id="musicToggle">
+        <span id="musicIcon">🎵</span>
+        <span id="musicText">เปิดเพลง</span>
+    </div>
+
+    <main class="relative z-20 min-h-screen flex flex-col items-center justify-center px-6 py-20 text-center">
+        <div class="max-w-6xl mx-auto w-full">
+            <!-- badge สีชมพูฟ้า -->
+            <div class="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-pink-300/40 text-pink-200 text-sm font-semibold tracking-wide mb-10 animate-fade-up">
+                <span class="w-2 h-2 rounded-full bg-pink-400"></span>
+                UTTAYANSUKSAKRABI SCHOOL • CAMP 2026
+                <span class="w-2 h-2 rounded-full bg-sky-400"></span>
             </div>
 
-            <h1 class="text-2xl md:text-5xl font-extrabold text-white mb-6 tracking-tight drop-shadow-xl">
-                ค่ายเมล็ดพันธุ์ใหม่หัวใจอุทยานฯ
+            <!-- โลโก้ trio -->
+            <div class="flex flex-row justify-center items-center gap-6 md:gap-12 mb-12 animate-fade-up delay-100">
+                <img src="https://i.postimg.cc/WztgWSpc/IMG-7790.png" alt="logo1" class="h-16 md:h-24 w-auto drop-shadow-xl brightness-0 invert-[0.9]">
+                <span class="text-3xl font-thin text-pink-300/70">✧</span>
+                <img src="https://i.postimg.cc/mZqHZY27/IMG-8562.png" alt="logo2" class="h-16 md:h-24 w-auto drop-shadow-xl brightness-0 invert-[0.9]">
+                <span class="text-3xl font-thin text-pink-300/70">✧</span>
+                <img src="https://i.postimg.cc/rpQDBWPp/U.png" alt="logo3" class="h-16 md:h-24 w-auto drop-shadow-xl brightness-0 invert-[0.9]">
+            </div>
+
+            <!-- หัวข้อหลัก -->
+            <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight mb-5 animate-fade-up delay-200">
+                <span class="text-gradient-pink">ค่ายเมล็ดพันธุ์ใหม่</span><br>
+                <span class="text-white">หัวใจอุทยานฯ</span>
             </h1>
 
-            <p class="text-xl md:text-3xl font-bold text-gray-100 mb-16 leading-relaxed">
-                <span class="text-white border-b-4 border-blue-600 pb-2 inline-block mb-3">18 พฤษภาคม 2569</span> <br>
-                ณ โรงเรียนอุทยานศึกษากระบี่
+            <p class="text-xl md:text-2xl text-gray-200 font-medium max-w-2xl mx-auto mb-3 animate-fade-up delay-200">
+                <span class="border-b-2 border-pink-400 pb-1">18 พฤษภาคม 2569</span>
             </p>
+            <div class="flex justify-center gap-2 text-pink-200 text-base md:text-lg animate-fade-up delay-300">
+                <span>📍</span> โรงเรียนอุทยานศึกษากระบี่
+            </div>
 
-            <div class="flex flex-row justify-center items-center gap-3 md:gap-8 mb-16 w-full max-w-4xl mx-auto">
-                <div class="flex-1 max-w-[150px] bg-white/[0.05] border border-white/20 py-6 md:py-10 rounded-[2.5rem] shadow-2xl">
-                    <span id="days" class="text-3xl md:text-7xl font-extrabold block text-white">00</span>
-                    <p class="text-[10px] md:text-xs uppercase font-black text-gray-400 mt-2 tracking-widest">Days</p>
+            <!-- countdown -->
+            <div class="grid grid-cols-4 gap-3 sm:gap-5 max-w-3xl mx-auto my-16 animate-fade-up delay-300">
+                <div class="countdown-card py-6 rounded-2xl shadow-2xl">
+                    <span id="days" class="text-5xl md:text-7xl font-black text-pink-200 block">00</span>
+                    <span class="text-[11px] uppercase font-bold text-pink-300/90 tracking-widest mt-2 block">วัน</span>
                 </div>
-                <div class="flex-1 max-w-[150px] bg-white/[0.05] border border-white/20 py-6 md:py-10 rounded-[2.5rem] shadow-2xl">
-                    <span id="hours" class="text-3xl md:text-7xl font-extrabold block text-white">00</span>
-                    <p class="text-[10px] md:text-xs uppercase font-black text-gray-400 mt-2 tracking-widest">Hours</p>
+                <div class="countdown-card py-6 rounded-2xl">
+                    <span id="hours" class="text-5xl md:text-7xl font-black text-sky-200 block">00</span>
+                    <span class="text-[11px] uppercase font-bold text-sky-300/90 tracking-widest mt-2 block">ชั่วโมง</span>
                 </div>
-                <div class="flex-1 max-w-[150px] bg-white/[0.05] border border-white/20 py-6 md:py-10 rounded-[2.5rem] shadow-2xl">
-                    <span id="minutes" class="text-3xl md:text-7xl font-extrabold block text-white">00</span>
-                    <p class="text-[10px] md:text-xs uppercase font-black text-gray-400 mt-2 tracking-widest">Mins</p>
+                <div class="countdown-card py-6 rounded-2xl">
+                    <span id="minutes" class="text-5xl md:text-7xl font-black text-pink-200 block">00</span>
+                    <span class="text-[11px] uppercase font-bold text-pink-300/90 tracking-widest mt-2 block">นาที</span>
                 </div>
-                <div class="flex-1 max-w-[150px] bg-blue-600/30 border border-blue-400/40 py-6 md:py-10 rounded-[2.5rem] shadow-2xl">
-                    <span id="seconds" class="text-3xl md:text-7xl font-extrabold block text-white">00</span>
-                    <p class="text-[10px] md:text-xs uppercase font-black text-blue-300 mt-2 tracking-widest">Secs</p>
+                <div class="countdown-card py-6 rounded-2xl bg-gradient-to-br from-pink-500/20 to-sky-500/20 border-pink-400/50">
+                    <span id="seconds" class="text-5xl md:text-7xl font-black text-white block">00</span>
+                    <span class="text-[11px] uppercase font-bold text-pink-200 tracking-widest mt-2 block">วินาที</span>
                 </div>
             </div>
 
-            <div class="flex flex-col md:flex-row justify-center items-center gap-4">
-                <button onclick="toggleModal()" class="cta-glow bg-blue-600 text-white px-12 py-5 rounded-2xl font-black text-xl md:text-2xl uppercase tracking-widest transition-all w-full md:w-auto">
-                    กำหนดการและข้อมูลสำคัญ
+            <!-- ปุ่ม action -->
+            <div class="flex flex-col sm:flex-row justify-center gap-5 animate-fade-up delay-400">
+                <button onclick="toggleModal()" class="btn-pastel px-8 py-4 text-black font-bold text-lg md:text-xl tracking-wide w-full sm:w-auto shadow-xl flex items-center justify-center gap-2">
+                    <span>📋</span> กำหนดการและข้อมูลสำคัญ
                 </button>
-
-                <a href="https://ลิงก์ดาวน์โหลดรูปภาพของคุณ.com" target="_blank" class="download-glow border-2 border-purple-500 text-purple-400 hover:bg-purple-500 hover:text-white px-10 py-4.5 rounded-2xl font-black text-lg md:text-xl uppercase tracking-widest transition-all inline-flex items-center gap-3 w-full md:w-auto justify-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                    </svg>
+                <a href="#" id="downloadBtn" class="btn-outline-pink px-7 py-4 text-pink-100 font-semibold text-lg flex items-center justify-center gap-2 w-full sm:w-auto backdrop-blur-sm">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
                     ดาวน์โหลดรูปภาพ
                 </a>
             </div>
+            <p class="text-xs text-pink-200/50 mt-10 animate-fade-up delay-500">✨ กดดูรายละเอียดกิจกรรม พร้อมเสียงเพลงบรรยากาศ ✨</p>
         </div>
-    </section>
+    </main>
 
-    <div id="eventModal" class="fixed inset-0 flex items-center justify-center p-4 bg-black/95">
-        <div class="bg-[#0c0c0c] border border-white/10 w-full max-w-[480px] rounded-[3rem] overflow-hidden shadow-2xl flex flex-col max-h-[90vh]">
-            <div class="bg-gradient-to-br from-blue-600 to-indigo-900 p-8 pb-12 relative shrink-0">
-                <div class="flex justify-center items-center gap-4 mb-6">
-                    <img src="https://i.postimg.cc/WztgWSpc/IMG-7790.png" alt="L1" class="h-10 w-10 md:h-12 md:w-12 object-contain">
-                    <img src="https://i.postimg.cc/mZqHZY27/IMG-8562.png" alt="L2" class="h-10 w-10 md:h-12 md:w-12 object-contain">
-                    <img src="https://i.postimg.cc/rpQDBWPp/U.png" alt="L3" class="h-10 w-10 md:h-12 md:w-12 object-contain">
+    <!-- Modal ดีเทล -->
+    <div id="eventModal" class="fixed inset-0 flex items-end md:items-center justify-center p-4 z-[100] transition-all duration-500 invisible opacity-0" style="backdrop-filter: blur(0px);">
+        <div class="absolute inset-0 bg-black/60 transition-opacity duration-300" onclick="toggleModal()"></div>
+        <div class="relative modal-glass max-w-lg w-full mx-auto overflow-hidden shadow-2xl transform transition-all duration-300 translate-y-10 scale-95">
+            <div class="p-6 md:p-8">
+                <div class="flex justify-between items-start">
+                    <div class="flex gap-2">
+                        <img src="https://i.postimg.cc/WztgWSpc/IMG-7790.png" class="h-10 w-auto brightness-0 invert opacity-80">
+                        <img src="https://i.postimg.cc/mZqHZY27/IMG-8562.png" class="h-10 w-auto brightness-0 invert opacity-80">
+                        <img src="https://i.postimg.cc/rpQDBWPp/U.png" class="h-10 w-auto brightness-0 invert opacity-80">
+                    </div>
+                    <button onclick="toggleModal()" class="text-3xl text-pink-300 leading-6 hover:text-white">&times;</button>
                 </div>
-                <h2 class="text-3xl font-extrabold text-white mb-1 text-center">Event Details</h2>
-                <p class="text-blue-100/70 text-sm font-medium text-center">กำหนดการและข้อมูลสำคัญ</p>
-                <button onclick="toggleModal()" class="absolute top-6 right-6 text-white text-3xl">&times;</button>
-            </div>
-            
-            <div class="p-6 md:p-8 space-y-8 -mt-8 bg-[#0c0c0c] rounded-t-[2.5rem] relative z-10 overflow-y-auto text-left">
-                <div class="flex items-start gap-5">
-                    <div class="w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center shrink-0 border border-white/10 text-xl text-blue-400 shadow-inner">📍</div>
-                    <div>
-                        <h4 class="text-blue-400 text-[10px] uppercase font-black mb-1">Location</h4>
-                        <p class="text-gray-100 text-lg font-bold">โรงเรียนอุทยานศึกษากระบี่</p>
+                <h2 class="text-3xl font-extrabold mt-3 bg-gradient-to-r from-pink-300 to-sky-300 bg-clip-text text-transparent">Event Details</h2>
+                <p class="text-gray-300 text-sm mb-5">ข้อมูลสำคัญ และไทม์ไลน์ค่าย</p>
+
+                <div class="flex items-start gap-3 mb-6">
+                    <div class="w-10 h-10 rounded-full bg-pink-500/20 flex items-center justify-center text-xl">📍</div>
+                    <div><p class="text-xs font-bold text-pink-300 uppercase">สถานที่</p><p class="text-white font-medium">โรงเรียนอุทยานศึกษากระบี่</p></div>
+                </div>
+                <div class="mb-7">
+                    <div class="flex items-center gap-2 mb-3"><span class="text-sky-300 text-sm">📅</span><p class="text-xs font-bold text-sky-300 uppercase">กำหนดการ</p></div>
+                    <div class="space-y-3">
+                        <div class="schedule-item p-3 flex justify-between flex-wrap"><span class="text-pink-200 font-mono">09:00 — 10:00</span><span class="text-white">ลงทะเบียน ตรวจสอบรายชื่อ</span></div>
+                        <div class="schedule-item p-3 flex justify-between flex-wrap"><span class="text-pink-200 font-mono">10:00 — 12:00</span><span class="text-white">นำสัมภาระไปเก็บ / พักเบรก</span></div>
+                        <div class="schedule-item p-3 flex justify-between flex-wrap"><span class="text-pink-200 font-mono">13:00 — 15:00</span><span class="text-white font-medium">พิธีเปิดโดย บาบอปรีชา พยายาม</span></div>
+                        <div class="schedule-item p-3 flex justify-between flex-wrap"><span class="text-pink-200 font-mono">15:30 — 17:30</span><span class="text-white">Workshop “สร้างแรงบันดาลใจ”</span></div>
+                        <div class="schedule-item p-3 flex justify-between flex-wrap"><span class="text-pink-200 font-mono">19:00 — 21:00</span><span class="text-white">เปิดบ้านค่าย & กิจกรรมกลุ่ม</span></div>
                     </div>
                 </div>
-
-                <div class="flex items-start gap-5">
-                    <div class="w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center shrink-0 border border-white/10 text-xl text-purple-400 shadow-inner">📅</div>
-                    <div class="w-full">
-                        <h4 class="text-purple-400 text-[10px] uppercase font-black mb-4">Schedule</h4>
-                        <div class="space-y-3 font-bold">
-                            <div class="flex justify-between items-center bg-white/[0.04] p-4 rounded-2xl border border-white/5">
-                                <span class="text-blue-400 text-sm">09:00 — 10:00</span>
-                                <span class="text-gray-200 text-sm">ลงทะเบียนตรวจสอบรายชื่อ</span>
-                            </div>
-                            <div class="flex justify-between items-center bg-white/[0.04] p-4 rounded-2xl border border-white/5">
-                                <span class="text-blue-400 text-sm">10:00 — 12:00</span>
-                                <span class="text-gray-200 text-sm">นำสัมภาระไปเก็บให้เรียบร้อย</span>
-                            </div>
-                            <div class="flex justify-between items-start bg-white/[0.04] p-4 rounded-2xl border border-white/5">
-                                <span class="text-blue-400 text-sm mt-1">13:00 — 15:00</span>
-                                <span class="text-gray-200 text-sm text-right leading-relaxed">พิธีเปิดงานโดย บาบอปรีชา<br>พยายาม</span>
-                            </div>
-                        </div>
-                    </div>
+                <div class="bg-white/10 rounded-2xl p-3 text-xs text-gray-200 border border-pink-500/20 mb-5">
+                    📌 สิ่งที่ต้องเตรียม: ชุดสุภาพ, เสื้อค่าย (รับ当日), อุปกรณ์นั่งพื้น, รอยยิ้มสดใส
                 </div>
-
-                <button onclick="toggleModal()" class="w-full py-5 bg-white text-black rounded-[1.8rem] font-black text-lg hover:bg-blue-600 hover:text-white transition-all active:scale-95">
-                    เข้าใจแล้ว
-                </button>
+                <button onclick="toggleModal()" class="w-full py-3 bg-gradient-to-r from-pink-500 to-sky-500 text-white font-bold rounded-full text-base hover:shadow-xl transition">เข้าใจแล้ว</button>
             </div>
         </div>
     </div>
 
-    <footer class="py-20 text-center bg-[#050505] border-t border-white/5">
-        <div class="max-w-2xl mx-auto px-6 opacity-40 hover:opacity-100 transition-opacity">
-            <p class="text-gray-500 text-[10px] uppercase tracking-[0.8em] mb-4">Developed By</p>
-            <p class="text-xl font-extrabold text-white">คณะกรรมการสภานักเรียนโรงเรียนอุทยานศึกษากระบี่</p>
-            <p class="text-[10px] text-blue-500 mt-2 font-black uppercase tracking-widest">UTTAYANSUKSAKRABI SCHOOL</p>
+    <footer class="relative z-20 py-14 text-center border-t border-pink-500/20 bg-black/30 backdrop-blur-sm mt-20">
+        <div class="max-w-3xl mx-auto px-6">
+            <p class="text-gray-400 text-[11px] tracking-[0.3em] uppercase mb-3">จัดทำโดย</p>
+            <p class="text-white font-semibold text-lg">คณะกรรมการสภานักเรียนโรงเรียนอุทยานศึกษากระบี่</p>
+            <div class="w-12 h-px bg-gradient-to-r from-pink-400 to-sky-400 mx-auto my-4"></div>
+            <p class="text-[10px] text-pink-300/70 font-mono">UTTAYANSUKSAKRABI SCHOOL · CAMP 2026</p>
         </div>
     </footer>
 
     <script>
-        function toggleModal() {
-            const modal = document.getElementById('eventModal');
-            modal.classList.toggle('active');
-            document.body.style.overflow = modal.classList.contains('active') ? 'hidden' : 'auto';
+        // ========== BACKGROUND SLIDER ==========
+        const slides = document.querySelectorAll('.slide-bg');
+        let currentSlide = 0;
+        function nextBackground() {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.add('active');
         }
+        setInterval(nextBackground, 6000);
 
-        const targetDate = new Date("2026-05-18T00:00:00").getTime();
+        // ========== ผีเสื้อขาวลอย ==========
+        const butterflyContainer = document.getElementById('butterflyContainer');
+        function createButterfly() {
+            const butterfly = document.createElement('div');
+            butterfly.classList.add('butterfly');
+            const size = 30 + Math.random() * 35;
+            butterfly.style.width = `${size}px`;
+            butterfly.style.height = `${size}px`;
+            butterfly.style.left = `${Math.random() * 85}vw`;
+            butterfly.style.top = `${Math.random() * 85}vh`;
+            const duration = 18 + Math.random() * 20;
+            const delay = Math.random() * 10;
+            butterfly.style.animation = `floatButterfly ${duration}s infinite alternate ease-in-out`;
+            butterfly.style.animationDelay = `${delay}s`;
+            butterfly.style.opacity = 0.5 + Math.random() * 0.4;
+            butterflyContainer.appendChild(butterfly);
+            setInterval(() => {
+                if(butterfly && butterfly.style) {
+                    let left = parseFloat(butterfly.style.left);
+                    let top = parseFloat(butterfly.style.top);
+                    left += (Math.random() - 0.5) * 1.2;
+                    top += (Math.random() - 0.5) * 1.2;
+                    left = Math.min(Math.max(left, -5), 90);
+                    top = Math.min(Math.max(top, -5), 85);
+                    butterfly.style.left = `${left}vw`;
+                    butterfly.style.top = `${top}vh`;
+                }
+            }, 3800);
+        }
+        for(let i=0;i<9;i++) createButterfly();
 
-        const updateCountdown = () => {
-            const now = new Date().getTime();
-            const gap = targetDate - now;
-
-            if (gap <= 0) {
-                document.querySelectorAll('#days, #hours, #minutes, #seconds').forEach(el => el.innerText = "00");
+        // ========== MUSIC (Ambient Lo-fi เบาๆ) ==========
+        // สร้าง AudioContext สำหรับเสียงที่เบาและปลอดภัย (ผู้ใช้ต้องคลิกเปิดก่อน)
+        let audioContext = null;
+        let isPlaying = false;
+        let gainNode = null;
+        let oscillator = null;
+        let musicInterval = null;
+        
+        // ฟังก์ชันสร้างเสียง ambient เบาๆ คล้ายดนตรีธรรมชาติ (ใช้ oscillator + noise เบา)
+        function startAmbientMusic() {
+            if (audioContext && isPlaying) return;
+            
+            try {
+                if (!audioContext) {
+                    audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                }
+                
+                // ปลุก AudioContext ถ้ามัน suspended
+                if (audioContext.state === 'suspended') {
+                    audioContext.resume();
+                }
+                
+                gainNode = audioContext.createGain();
+                gainNode.gain.value = 0.15; // เบามาก
+                gainNode.connect(audioContext.destination);
+                
+                // สร้างเสียงพื้นฐาน soft pad (ใช้ oscillator + filter)
+                const osc1 = audioContext.createOscillator();
+                const osc2 = audioContext.createOscillator();
+                const filter = audioContext.createBiquadFilter();
+                const gainOsc = audioContext.createGain();
+                
+                osc1.type = 'sine';
+                osc1.frequency.value = 261.63; // C4
+                osc2.type = 'sine';
+                osc2.frequency.value = 329.63; // E4
+                
+                filter.type = 'lowpass';
+                filter.frequency.value = 800;
+                filter.Q.value = 5;
+                
+                gainOsc.gain.value = 0.08;
+                
+                osc1.connect(filter);
+                osc2.connect(filter);
+                filter.connect(gainOsc);
+                gainOsc.connect(gainNode);
+                
+                osc1.start();
+                osc2.start();
+                
+                // เล่น LFO สลับเบาๆ
+                let lfoGain = 0.08;
+                let lfoDirection = 0.002;
+                const lfoInterval = setInterval(() => {
+                    if (!isPlaying) return;
+                    lfoGain += lfoDirection;
+                    if (lfoGain >= 0.12) lfoDirection = -0.002;
+                    if (lfoGain <= 0.05) lfoDirection = 0.002;
+                    if (gainOsc) gainOsc.gain.value = lfoGain;
+                }, 800);
+                
+                // สร้างเสียง background noise เบาๆ (white noise + filter)
+                const bufferSize = 4096;
+                const noiseNode = audioContext.createScriptProcessor(bufferSize, 1, 1);
+                const noiseGain = audioContext.createGain();
+                noiseGain.gain.value = 0.02;
+                const noiseFilter = audioContext.createBiquadFilter();
+                noiseFilter.type = 'lowpass';
+                noiseFilter.frequency.value = 800;
+                
+                noiseNode.onaudioprocess = function(e) {
+                    if (!isPlaying) return;
+                    const output = e.outputBuffer.getChannelData(0);
+                    for (let i = 0; i < bufferSize; i++) {
+                        output[i] = (Math.random() * 2 - 1) * 0.08;
+                    }
+                };
+                noiseNode.connect(noiseFilter);
+                noiseFilter.connect(noiseGain);
+                noiseGain.connect(gainNode);
+                
+                // เก็บ oscillator และ interval เพื่อหยุดทีหลัง
+                window._activeOsc1 = osc1;
+                window._activeOsc2 = osc2;
+                window._lfoInterval = lfoInterval;
+                window._noiseNode = noiseNode;
+                
+                isPlaying = true;
+                updateMusicUI(true);
+            } catch(e) {
+                console.log("Audio not supported or need user interaction");
+            }
+        }
+        
+        function stopAmbientMusic() {
+            if (!isPlaying) return;
+            try {
+                if (window._activeOsc1) {
+                    window._activeOsc1.stop();
+                    window._activeOsc1 = null;
+                }
+                if (window._activeOsc2) {
+                    window._activeOsc2.stop();
+                    window._activeOsc2 = null;
+                }
+                if (window._lfoInterval) {
+                    clearInterval(window._lfoInterval);
+                    window._lfoInterval = null;
+                }
+                if (window._noiseNode) {
+                    window._noiseNode.disconnect();
+                    window._noiseNode = null;
+                }
+                if (gainNode) {
+                    gainNode.gain.value = 0;
+                    gainNode.disconnect();
+                }
+                if (audioContext) {
+                    audioContext.close().catch(e=>{});
+                    audioContext = null;
+                }
+                isPlaying = false;
+                updateMusicUI(false);
+            } catch(e) {}
+        }
+        
+        function updateMusicUI(playing) {
+            const iconSpan = document.getElementById('musicIcon');
+            const textSpan = document.getElementById('musicText');
+            const toggleDiv = document.getElementById('musicToggle');
+            if (playing) {
+                iconSpan.innerHTML = '🎶';
+                textSpan.innerText = 'ปิดเพลง';
+                toggleDiv.classList.add('music-icon-playing');
+            } else {
+                iconSpan.innerHTML = '🎵';
+                textSpan.innerText = 'เปิดเพลง';
+                toggleDiv.classList.remove('music-icon-playing');
+            }
+        }
+        
+        // Toggle music เมื่อคลิกปุ่ม
+        const musicToggleBtn = document.getElementById('musicToggle');
+        musicToggleBtn.addEventListener('click', () => {
+            if (isPlaying) {
+                stopAmbientMusic();
+            } else {
+                startAmbientMusic();
+            }
+        });
+        
+        // เมื่อผู้ใช้โต้ตอบกับหน้า (คลิกที่ไหนก็ได้) ให้เริ่ม AudioContext ได้ แต่ไม่บังคับ auto-play (เพื่อ compliance)
+        function resumeAudioOnFirstInteraction() {
+            if (audioContext && audioContext.state === 'suspended') {
+                audioContext.resume();
+            }
+        }
+        document.body.addEventListener('click', resumeAudioOnFirstInteraction);
+        document.body.addEventListener('touchstart', resumeAudioOnFirstInteraction);
+        
+        // ========== MODAL CONTROL ==========
+        const modal = document.getElementById('eventModal');
+        function toggleModal() {
+            const isActive = modal.classList.contains('active');
+            if (!isActive) {
+                modal.classList.add('active');
+                modal.style.visibility = 'visible';
+                modal.style.opacity = '1';
+                modal.style.backdropFilter = 'blur(12px)';
+                document.body.style.overflow = 'hidden';
+                const inner = modal.querySelector('.relative.modal-glass');
+                if(inner) inner.style.transform = 'translateY(0) scale(1)';
+            } else {
+                modal.classList.remove('active');
+                modal.style.visibility = 'hidden';
+                modal.style.opacity = '0';
+                modal.style.backdropFilter = 'blur(0px)';
+                document.body.style.overflow = 'auto';
+                const inner = modal.querySelector('.relative.modal-glass');
+                if(inner) inner.style.transform = 'translateY(20px) scale(0.97)';
+            }
+        }
+        modal.style.visibility = 'hidden';
+        const modalInner = modal.querySelector('.relative.modal-glass');
+        if(modalInner) modalInner.style.transform = 'translateY(20px) scale(0.97)';
+        
+        // COUNTDOWN
+        const target = new Date(2026, 4, 18, 0, 0, 0).getTime();
+        function updateCD() {
+            const now = Date.now();
+            const gap = target - now;
+            if(gap <= 0) {
+                document.getElementById('days').innerText = "00";
+                document.getElementById('hours').innerText = "00";
+                document.getElementById('minutes').innerText = "00";
+                document.getElementById('seconds').innerText = "00";
                 return;
             }
-
-            const second = 1000, minute = second * 60, hour = minute * 60, day = hour * 24;
-            const d = Math.floor(gap / day), h = Math.floor((gap % day) / hour), m = Math.floor((gap % hour) / minute), s = Math.floor((gap % minute) / second);
-
-            document.getElementById('days').innerText = d.toString().padStart(2, '0');
-            document.getElementById('hours').innerText = h.toString().padStart(2, '0');
-            document.getElementById('minutes').innerText = m.toString().padStart(2, '0');
-            document.getElementById('seconds').innerText = s.toString().padStart(2, '0');
-        };
-
-        setInterval(updateCountdown, 1000);
-        updateCountdown();
+            const d = Math.floor(gap / 86400000);
+            const h = Math.floor((gap % 86400000) / 3600000);
+            const m = Math.floor((gap % 3600000) / 60000);
+            const s = Math.floor((gap % 60000) / 1000);
+            document.getElementById('days').innerText = d.toString().padStart(2,'0');
+            document.getElementById('hours').innerText = h.toString().padStart(2,'0');
+            document.getElementById('minutes').innerText = m.toString().padStart(2,'0');
+            document.getElementById('seconds').innerText = s.toString().padStart(2,'0');
+        }
+        setInterval(updateCD, 1000);
+        updateCD();
+        
+        const dlBtn = document.getElementById('downloadBtn');
+        dlBtn?.addEventListener('click', (e) => {
+            e.preventDefault();
+            alert("🦋 คลังภาพค่ายเมล็ดพันธุ์ใหม่ กำลังจัดเตรียมให้ดาวน์โหลดเร็วๆ นี้ (18 พ.ค. 2026) ติดตามเพจโรงเรียน!");
+        });
+        
+        document.addEventListener('click', (e) => {
+            if(modal.classList.contains('active') && e.target === modal) toggleModal();
+        });
+        document.addEventListener('keydown', (e) => { if(e.key === 'Escape' && modal.classList.contains('active')) toggleModal(); });
     </script>
 </body>
 </html>
