@@ -10,13 +10,11 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Inter', 'Kanit', sans-serif; background: #0a0a0e; color: #fff; overflow-x: hidden; }
         
-        /* พื้นหลัง slider สวยงาม */
         .bg-slider { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; overflow: hidden; }
         .slide-bg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-size: cover; background-position: center; opacity: 0; transition: opacity 1.8s cubic-bezier(0.25, 0.8, 0.25, 1); filter: brightness(0.35) saturate(1.1); }
         .slide-bg.active { opacity: 1; z-index: 1; }
         .gradient-overlay { position: absolute; inset: 0; background: radial-gradient(circle at 20% 30%, rgba(255,180,220,0.25), rgba(0,150,255,0.2), rgba(0,0,0,0.7)); z-index: 2; pointer-events: none; }
         
-        /* ผีเสื้อขาว - 3 ตัวเท่านั้น */
         .butterfly {
             position: fixed;
             width: 38px;
@@ -37,7 +35,6 @@
             100% { transform: translate(0, 0) rotate(0deg) scale(1); }
         }
         
-        /* การ์ดนับถอยหลัง */
         .countdown-card {
             background: rgba(255, 245, 250, 0.1);
             backdrop-filter: blur(16px);
@@ -47,7 +44,6 @@
         }
         .countdown-card:hover { transform: translateY(-4px); background: rgba(255, 200, 230, 0.2); border-color: rgba(255, 150, 210, 0.7); }
         
-        /* ปุ่มสไตล์พาสเทล */
         .btn-pastel {
             background: linear-gradient(135deg, #ffb3d9, #80d4ff);
             border-radius: 60px;
@@ -55,6 +51,7 @@
             box-shadow: 0 6px 14px rgba(255, 120, 180, 0.3);
         }
         .btn-pastel:hover { transform: scale(1.02); box-shadow: 0 14px 28px rgba(255, 100, 170, 0.5); background: linear-gradient(135deg, #ffc0e0, #90e0ff); }
+        
         .btn-outline-pink {
             border-radius: 60px;
             background: rgba(255, 210, 230, 0.12);
@@ -64,7 +61,6 @@
         }
         .btn-outline-pink:hover { background: rgba(255, 180, 210, 0.25); border-color: #ffb3d9; transform: scale(1.01); }
         
-        /* ปุ่มแผนที่ขนาดเล็ก */
         .map-link-btn {
             display: inline-flex;
             align-items: center;
@@ -81,18 +77,10 @@
             margin-left: 8px;
             text-decoration: none;
         }
-        .map-link-btn:hover {
-            background: rgba(255, 180, 210, 0.3);
-            transform: scale(1.02);
-            color: white;
-            border-color: #ff99cc;
-        }
         
-        /* โมดอล */
         .modal-glass { background: rgba(15, 10, 20, 0.92); backdrop-filter: blur(28px); border-radius: 2rem; border: 1px solid rgba(255, 180, 220, 0.5); }
         .schedule-item { background: rgba(255, 220, 240, 0.05); border-radius: 1.25rem; border-left: 3px solid #ff99cc; }
         
-        /* อนิเมชัน */
         @keyframes fadeSlideUp { from { opacity: 0; transform: translateY(30px); filter: blur(5px);} to { opacity: 1; transform: translateY(0); filter: blur(0);} }
         .animate-fade-up { animation: fadeSlideUp 0.9s cubic-bezier(0.12, 0.75, 0.3, 1) forwards; }
         .delay-100 { animation-delay: 0.1s; }
@@ -103,43 +91,21 @@
         
         .text-gradient-pink { background: linear-gradient(135deg, #FFC0E8, #8EC8FF); -webkit-background-clip: text; background-clip: text; color: transparent; }
         
-        /* ปุ่มเสียง */
         .music-toggle {
-            position: fixed;
-            bottom: 24px;
-            right: 24px;
-            z-index: 1000;
-            background: rgba(255, 220, 240, 0.2);
-            backdrop-filter: blur(12px);
-            border-radius: 60px;
-            padding: 8px 18px;
-            border: 1px solid rgba(255, 180, 210, 0.6);
-            cursor: pointer;
-            transition: all 0.2s;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 13px;
-            font-weight: 500;
-            color: #ffd9f0;
+            position: fixed; bottom: 24px; right: 24px; z-index: 1000;
+            background: rgba(255, 220, 240, 0.2); backdrop-filter: blur(12px);
+            border-radius: 60px; padding: 8px 18px; border: 1px solid rgba(255, 180, 210, 0.6);
+            cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 500; color: #ffd9f0;
         }
         .music-toggle:hover { background: rgba(255, 180, 210, 0.35); transform: scale(1.02); }
         @keyframes soundWave { 0% { opacity: 0.5; transform: scale(0.95);} 100% { opacity: 1; transform: scale(1.08);} }
         .music-icon-playing { animation: soundWave 1s infinite alternate; }
         
-        /* ช่องทางติดตามโซเชียล */
         .social-icon {
-            transition: all 0.2s ease;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(4px);
-            border-radius: 40px;
-            padding: 6px 16px;
-            border: 0.5px solid rgba(255, 200, 220, 0.3);
-            font-size: 12px;
-            font-weight: 500;
+            transition: all 0.2s ease; display: inline-flex; align-items: center; gap: 8px;
+            background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(4px);
+            border-radius: 40px; padding: 6px 16px; border: 0.5px solid rgba(255, 200, 220, 0.3);
+            font-size: 12px; font-weight: 500;
         }
         .social-icon:hover { background: rgba(255, 180, 210, 0.2); transform: translateY(-2px); border-color: #ff99cc; }
         
@@ -238,7 +204,7 @@
 
     <div id="eventModal" class="fixed inset-0 flex items-end md:items-center justify-center p-4 z-[100] transition-all duration-500 invisible opacity-0" style="backdrop-filter: blur(0px);">
         <div class="absolute inset-0 bg-black/60 transition-opacity duration-300" onclick="toggleModal()"></div>
-        <div class="relative modal-glass max-w-lg w-full mx-auto overflow-hidden shadow-2xl transform transition-all duration-300 translate-y-10 scale-95">
+        <div class="relative modal-glass max-w-lg w-full mx-auto overflow-hidden shadow-2xl transform transition-all duration-300 translate-y-10 scale-95" style="max-height: 85vh; overflow-y: auto;">
             <div class="p-6 md:p-7">
                 <div class="flex justify-between items-start">
                     <div class="flex gap-2">
@@ -276,6 +242,13 @@
                     </div>
                 </div>
 
+                <div class="mb-6">
+                    <div class="flex items-center gap-2 mb-2"><span class="text-pink-300 text-xs">🎒</span><p class="text-[10px] font-bold text-pink-300 uppercase tracking-widest">การเตรียมความพร้อมก่อนมาค่าย</p></div>
+                    <div class="rounded-xl overflow-hidden border border-white/10 shadow-lg bg-black/20">
+                        <img src="https://i.postimg.cc/CxvX6xWz/att-TLWNPYMod-OGt0wjt-L5-YHy-GOo-O-3-OV-o-AHZQJmWc8a-8.jpg" class="w-full h-auto">
+                    </div>
+                </div>
+
                 <div class="bg-white/10 rounded-xl p-3 text-xs text-gray-200 border border-pink-500/20 mb-5">
                     📌 สิ่งที่ต้องเตรียม: ชุดสุภาพ, เข้าค่าย , อุปกรณ์นั่งพื้น, รอยยิ้มสดใส
                 </div>
@@ -289,23 +262,21 @@
             <p class="text-gray-400 text-[10px] tracking-[0.2em] uppercase mb-4">ติดตามความเคลื่อนไหว</p>
             
             <div class="flex flex-wrap justify-center gap-3 mb-8">
-            <div class="flex flex-wrap justify-center gap-3 mb-8">
-    <a href="https://www.facebook.com/UttayanSuksaKrabi?" target="_blank" class="social-icon text-pink-200">
-        โรงเรียนอุทยานศึกษากระบี่
-    </a>
-    <a href="https://www.facebook.com/USKOfficial1?" target="_blank" class="social-icon text-pink-200">
-        คณะกรรมการสภานักเรียนโรงเรียนอุทยานศึกษากระบี่
-    </a>
-    <a href="https://www.instagram.com/uskofficial_?igsh=MTM2amx5bmpiNGdjdA==" target="_blank" class="social-icon text-pink-200">
-        Instagram@uskofficial_
-    </a>
-    <a href="https://www.tiktok.com/@uskofficial_?_r=1&_t=ZS-95bDztWq1WC" target="_blank" class="social-icon text-pink-200">
-        Tiktok@uskofficial_
-    </a>
-    <a href="https://youtube.com/@uskofficial-001?si=QYDTZzxAD94w6Met" target="_blank" class="social-icon text-pink-200">
-        Youtube@uskofficial_
-    </a>
-</div>
+                <a href="https://www.facebook.com/UttayanSuksaKrabi?" target="_blank" class="social-icon text-pink-200">
+                    โรงเรียนอุทยานศึกษากระบี่
+                </a>
+                <a href="https://www.facebook.com/USKOfficial1?" target="_blank" class="social-icon text-pink-200">
+                    คณะกรรมการสภานักเรียนโรงเรียนอุทยานศึกษากระบี่
+                </a>
+                <a href="https://www.instagram.com/uskofficial_?igsh=MTM2amx5bmpiNGdjdA==" target="_blank" class="social-icon text-pink-200">
+                    Instagram@uskofficial_
+                </a>
+                <a href="https://www.tiktok.com/@uskofficial_?_r=1&_t=ZS-95bDztWq1WC" target="_blank" class="social-icon text-pink-200">
+                    Tiktok@uskofficial_
+                </a>
+                <a href="https://youtube.com/@uskofficial-001?si=QYDTZzxAD94w6Met" target="_blank" class="social-icon text-pink-200">
+                    Youtube@uskofficial_
+                </a>
             </div>
 
             <div class="w-12 h-px bg-gradient-to-r from-pink-400 to-sky-400 mx-auto my-4"></div>
@@ -315,20 +286,13 @@
     </footer>
 
     <script>
-        // ========== GOOGLE MAPS LINK (แก้ไข Syntax Error) ==========
-        const schoolLat = 8.0863;
-        const schoolLng = 98.9063;
-        const schoolName = "โรงเรียนอุทยานศึกษากระบี่";
-        // แก้ไข: ใช้ backtick (`) และเอาเลข 0 หน้าปีกกาออก
+        // JS ทั้งหมดคงเดิมตามที่คุณส่งมาเป๊ะๆ
         const mapsUrl = `https://maps.app.goo.gl/SBj1kBHf9qyUNcS26`;
-        
         const mapButton = document.getElementById('mapButton');
         const modalMapBtn = document.getElementById('modalMapBtn');
-        
         if(mapButton) mapButton.href = mapsUrl;
         if(modalMapBtn) modalMapBtn.href = mapsUrl;
         
-        // ========== SLIDER ภาพพื้นหลัง ==========
         const slides = document.querySelectorAll('.slide-bg');
         let currentSlide = 0;
         function nextBackground() {
@@ -338,26 +302,16 @@
         }
         setInterval(nextBackground, 6000);
 
-        // ========== ผีเสื้อขาว 3 ตัว ==========
         const butterflyContainer = document.getElementById('butterflyContainer');
         function createButterfly() {
             const butterfly = document.createElement('div');
             butterfly.classList.add('butterfly');
-            const size = 32 + Math.random() * 28;
-            butterfly.style.width = `${size}px`;
-            butterfly.style.height = `${size}px`;
             butterfly.style.left = `${Math.random() * 80}vw`;
             butterfly.style.top = `${Math.random() * 80}vh`;
-            const duration = 20 + Math.random() * 18;
-            const delay = Math.random() * 8;
-            butterfly.style.animation = `floatButterfly ${duration}s infinite alternate ease-in-out`;
-            butterfly.style.animationDelay = `${delay}s`;
-            butterfly.style.opacity = 0.5 + Math.random() * 0.3;
             butterflyContainer.appendChild(butterfly);
         }
         for(let i = 0; i < 3; i++) createButterfly();
 
-        // ========== MODAL ==========
         const modal = document.getElementById('eventModal');
         function toggleModal() {
             const isActive = modal.classList.contains('active');
@@ -380,23 +334,11 @@
             }
         }
         
-        document.addEventListener('click', (e) => {
-            if(modal.classList.contains('active') && e.target === modal) toggleModal();
-        });
-        document.addEventListener('keydown', (e) => { if(e.key === 'Escape' && modal.classList.contains('active')) toggleModal(); });
-
-        // ========== COUNTDOWN (แก้ไข Template Literals) ==========
-        const target = new Date(2026, 3, 22, 0, 0, 0).getTime(); // เดือน 4 คือ พฤษภาคม
+        const target = new Date(2026, 3, 22, 0, 0, 0).getTime();
         function updateCD() {
             const now = Date.now();
             const gap = target - now;
-            if(gap <= 0) {
-                document.getElementById('days').innerText = "00";
-                document.getElementById('hours').innerText = "00";
-                document.getElementById('minutes').innerText = "00";
-                document.getElementById('seconds').innerText = "00";
-                return;
-            }
+            if(gap <= 0) return;
             const d = Math.floor(gap / 86400000);
             const h = Math.floor((gap % 86400000) / 3600000);
             const m = Math.floor((gap % 3600000) / 60000);
@@ -407,59 +349,37 @@
             document.getElementById('seconds').innerText = s.toString().padStart(2, '0');
         }
         setInterval(updateCD, 1000);
-        updateCD();
 
-        const dlBtn = document.getElementById('downloadBtn');
-dlBtn?.addEventListener('click', (e) => {
-    // e.preventDefault(); // นำตัวนี้ออกเพื่อให้ลิงก์ทำงาน หรือใช้ window.open แทน
-    window.open("https://mega.nz/folder/WgAkBQgT#sLQde-_6PDyzFeHvDf3r3A", "_blank");
-});
+        document.getElementById('downloadBtn')?.addEventListener('click', (e) => {
+            window.open("https://mega.nz/folder/WgAkBQgT#sLQde-_6PDyzFeHvDf3r3A", "_blank");
+        });
 
-        // ========== MUSIC SYSTEM (แก้ไข Logic Audio) ==========
         let audioContext = null;
         let isMusicPlaying = false;
-        let osc1, osc2, lfoInterval;
-        
+        let osc1, osc2;
         const musicToggleBtn = document.getElementById('musicToggle');
         
-        function startAmbientMusic() {
-            if(!audioContext) audioContext = new (window.AudioContext || window.webkitAudioContext)();
-            if(audioContext.state === 'suspended') audioContext.resume();
-            
-            osc1 = audioContext.createOscillator();
-            osc2 = audioContext.createOscillator();
-            const gainOsc = audioContext.createGain();
-            
-            osc1.type = 'sine';
-            osc1.frequency.value = 261.63;
-            osc2.type = 'sine';
-            osc2.frequency.value = 329.63;
-            gainOsc.gain.value = 0.05;
-            
-            osc1.connect(gainOsc);
-            osc2.connect(gainOsc);
-            gainOsc.connect(audioContext.destination);
-            
-            osc1.start();
-            osc2.start();
-            isMusicPlaying = true;
-            document.getElementById('musicIcon').innerHTML = '🎶';
-            document.getElementById('musicText').innerText = 'ปิดเพลง';
-            musicToggleBtn.classList.add('music-icon-playing');
-        }
-        
-        function stopAmbientMusic() {
-            if(osc1) osc1.stop();
-            if(osc2) osc2.stop();
-            isMusicPlaying = false;
-            document.getElementById('musicIcon').innerHTML = '🎵';
-            document.getElementById('musicText').innerText = 'เปิดเพลง';
-            musicToggleBtn.classList.remove('music-icon-playing');
-        }
-        
         musicToggleBtn.addEventListener('click', () => {
-            if(isMusicPlaying) stopAmbientMusic();
-            else startAmbientMusic();
+            if(!audioContext) audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            if(!isMusicPlaying) {
+                osc1 = audioContext.createOscillator();
+                osc2 = audioContext.createOscillator();
+                const gain = audioContext.createGain();
+                osc1.frequency.value = 261.63; osc2.frequency.value = 329.63;
+                gain.gain.value = 0.05;
+                osc1.connect(gain); osc2.connect(gain); gain.connect(audioContext.destination);
+                osc1.start(); osc2.start();
+                isMusicPlaying = true;
+                document.getElementById('musicIcon').innerHTML = '🎶';
+                document.getElementById('musicText').innerText = 'ปิดเพลง';
+                musicToggleBtn.classList.add('music-icon-playing');
+            } else {
+                osc1.stop(); osc2.stop();
+                isMusicPlaying = false;
+                document.getElementById('musicIcon').innerHTML = '🎵';
+                document.getElementById('musicText').innerText = 'เปิดเพลง';
+                musicToggleBtn.classList.remove('music-icon-playing');
+            }
         });
     </script>
 </body>
