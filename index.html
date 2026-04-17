@@ -408,12 +408,11 @@
         setInterval(updateCD, 1000);
         updateCD();
 
-        // ========== DOWNLOAD BUTTON ==========
         const dlBtn = document.getElementById('downloadBtn');
-        dlBtn?.addEventListener('click', (e) => {
-            e.preventDefault();
-            alert("https://mega.nz/folder/WgAkBQgT#sLQde-_6PDyzFeHvDf3r3A");
-        });
+dlBtn?.addEventListener('click', (e) => {
+    // e.preventDefault(); // นำตัวนี้ออกเพื่อให้ลิงก์ทำงาน หรือใช้ window.open แทน
+    window.open("https://mega.nz/folder/WgAkBQgT#sLQde-_6PDyzFeHvDf3r3A", "_blank");
+});
 
         // ========== MUSIC SYSTEM (แก้ไข Logic Audio) ==========
         let audioContext = null;
