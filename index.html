@@ -283,19 +283,55 @@
             <p class="text-gray-400 text-[9px] tracking-wider">คณะกรรมการสภานักเรียน โรงเรียนอุทยานศึกษากระบี่</p>
             <p class="text-[9px] text-pink-400/60 mt-1 tracking-wide">UTTAYANSUKSAKRABI SCHOOL · CAMP 2026</p>
             
-            <!-- VISITOR COUNTER ADDED HERE (บรรทัดสุดท้ายของเว็บ) -->
             <div class="mt-6 pt-3 border-t border-white/5 text-center">
                 <p class="text-[8px] text-pink-300/40 inline-flex items-center gap-1.5">
                     <span>👁️</span> 
-                    <span id="visitorCounter">ผู้เข้าชมเว็บไซต์นี้: 0</span>
-                    <span>คน</span>
+                    <span id="visitorCounter">กำลังโหลดจำนวนผู้เข้าชม...</span>
                 </p>
             </div>
         </div>
     </footer>
 
+    <script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-database-compat.js"></script>
+
     <script>
-        // JS ทั้งหมดคงเดิมตามที่คุณส่งมาเป๊ะๆ พร้อมเพิ่ม Visitor Counter ที่ไม่กระทบโค้ดอื่น
+        // --- 1. ตั้งค่า Firebase ---
+        const firebaseConfig = {
+            apiKey: "AIzaSyDoqNLYFBkPNM408BCIOng6uvkXESBZvpM",
+            authDomain: "cameuttayan.firebaseapp.com",
+            projectId: "cameuttayan",
+            databaseURL: "https://cameuttayan-default-rtdb.asia-southeast1.firebasedatabase.app/", 
+            storageBucket: "cameuttayan.firebasestorage.app",
+            messagingSenderId: "510796545015",
+            appId: "1:510796545015:web:a2a67db98a647b83614cf2",
+            measurementId: "G-C0509GBE0T"
+        };
+        firebase.initializeApp(firebaseConfig);
+        const database = firebase.database();
+
+        // --- 2. ฟังก์ชันนับจำนวนผู้เข้าชม (Firebase) ---
+        async function updateVisitorCount() {
+            const counterRef = database.ref('visitorCount');
+            const counterSpan = document.getElementById('visitorCounter');
+            const hasVisited = localStorage.getItem('hasVisitedCamp2026');
+
+            if (!hasVisited) {
+                counterRef.transaction((currentValue) => {
+                    return (currentValue || 0) + 1;
+                });
+                localStorage.setItem('hasVisitedCamp2026', 'true');
+            }
+
+            counterRef.on('value', (snapshot) => {
+                const count = snapshot.val() || 0;
+                if (counterSpan) {
+                    counterSpan.innerText = `ผู้เข้าชมเว็บไซต์นี้ทั้งหมด: ${count.toLocaleString()} คน`;
+                }
+            });
+        }
+
+        // --- 3. โค้ดเดิมทั้งหมดของคุณซัน ---
         const mapsUrl = `https://maps.app.goo.gl/SBj1kBHf9qyUNcS26`;
         const mapButton = document.getElementById('mapButton');
         const modalMapBtn = document.getElementById('modalMapBtn');
@@ -391,20 +427,7 @@
             }
         });
 
-        // ----- VISITOR COUNTER (localStorage based, ไม่กระทบโค้ดเดิม) -----
-        function updateVisitorCount() {
-            let count = localStorage.getItem('uttayanVisitorCount');
-            if (count === null) {
-                count = 1;
-            } else {
-                count = parseInt(count) + 1;
-            }
-            localStorage.setItem('uttayanVisitorCount', count);
-            const counterSpan = document.getElementById('visitorCounter');
-            if (counterSpan) {
-                counterSpan.innerText = `ผู้เข้าชมเว็บไซต์นี้: ${count}`;
-            }
-        }
+        // เรียกใช้ฟังก์ชันนับจำนวนคน
         updateVisitorCount();
     </script>
 </body>
