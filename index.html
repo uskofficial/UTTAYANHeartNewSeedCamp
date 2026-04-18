@@ -282,11 +282,20 @@
             <div class="w-12 h-px bg-gradient-to-r from-pink-400 to-sky-400 mx-auto my-4"></div>
             <p class="text-gray-400 text-[9px] tracking-wider">คณะกรรมการสภานักเรียน โรงเรียนอุทยานศึกษากระบี่</p>
             <p class="text-[9px] text-pink-400/60 mt-1 tracking-wide">UTTAYANSUKSAKRABI SCHOOL · CAMP 2026</p>
+            
+            <!-- VISITOR COUNTER ADDED HERE (บรรทัดสุดท้ายของเว็บ) -->
+            <div class="mt-6 pt-3 border-t border-white/5 text-center">
+                <p class="text-[8px] text-pink-300/40 inline-flex items-center gap-1.5">
+                    <span>👁️</span> 
+                    <span id="visitorCounter">ผู้เข้าชมเว็บไซต์นี้: 0</span>
+                    <span>คน</span>
+                </p>
+            </div>
         </div>
     </footer>
 
     <script>
-        // JS ทั้งหมดคงเดิมตามที่คุณส่งมาเป๊ะๆ
+        // JS ทั้งหมดคงเดิมตามที่คุณส่งมาเป๊ะๆ พร้อมเพิ่ม Visitor Counter ที่ไม่กระทบโค้ดอื่น
         const mapsUrl = `https://maps.app.goo.gl/SBj1kBHf9qyUNcS26`;
         const mapButton = document.getElementById('mapButton');
         const modalMapBtn = document.getElementById('modalMapBtn');
@@ -381,6 +390,22 @@
                 musicToggleBtn.classList.remove('music-icon-playing');
             }
         });
+
+        // ----- VISITOR COUNTER (localStorage based, ไม่กระทบโค้ดเดิม) -----
+        function updateVisitorCount() {
+            let count = localStorage.getItem('uttayanVisitorCount');
+            if (count === null) {
+                count = 1;
+            } else {
+                count = parseInt(count) + 1;
+            }
+            localStorage.setItem('uttayanVisitorCount', count);
+            const counterSpan = document.getElementById('visitorCounter');
+            if (counterSpan) {
+                counterSpan.innerText = `ผู้เข้าชมเว็บไซต์นี้: ${count}`;
+            }
+        }
+        updateVisitorCount();
     </script>
 </body>
 </html>
