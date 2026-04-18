@@ -283,19 +283,19 @@
             <p class="text-gray-400 text-[9px] tracking-wider">คณะกรรมการสภานักเรียน โรงเรียนอุทยานศึกษากระบี่</p>
             <p class="text-[9px] text-pink-400/60 mt-1 tracking-wide">UTTAYANSUKSAKRABI SCHOOL · CAMP 2026</p>
             
-            <!-- VISITOR COUNTER ADDED HERE (บรรทัดสุดท้ายของเว็บ) -->
+            <!-- VISITOR COUNTER (ใช้ CountAPI เพื่อนับรวมทุกคนจริง) -->
             <div class="mt-6 pt-3 border-t border-white/5 text-center">
                 <p class="text-[8px] text-pink-300/40 inline-flex items-center gap-1.5">
                     <span>👁️</span> 
-                    <span id="visitorCounter">ผู้เข้าชมเว็บไซต์นี้: 0</span>
-                    <span>คน</span>
+                    <span id="visitorCounter">กำลังโหลดจำนวนผู้เข้าชม...</span>
                 </p>
             </div>
         </div>
     </footer>
 
     <script>
-        // JS ทั้งหมดคงเดิมตามที่คุณส่งมาเป๊ะๆ พร้อมเพิ่ม Visitor Counter ที่ไม่กระทบโค้ดอื่น
+        // JS ทั้งหมดคงเดิมตามที่คุณส่งมา พร้อมเพิ่ม Visitor Counter แบบ CountAPI
+        
         const mapsUrl = `https://maps.app.goo.gl/SBj1kBHf9qyUNcS26`;
         const mapButton = document.getElementById('mapButton');
         const modalMapBtn = document.getElementById('modalMapBtn');
@@ -391,18 +391,24 @@
             }
         });
 
-        // ----- VISITOR COUNTER (localStorage based, ไม่กระทบโค้ดเดิม) -----
-        function updateVisitorCount() {
-            let count = localStorage.getItem('uttayanVisitorCount');
-            if (count === null) {
-                count = 1;
-            } else {
-                count = parseInt(count) + 1;
-            }
-            localStorage.setItem('uttayanVisitorCount', count);
-            const counterSpan = document.getElementById('visitorCounter');
-            if (counterSpan) {
-                counterSpan.innerText = `ผู้เข้าชมเว็บไซต์นี้: ${count}`;
+        // ----- VISITOR COUNTER (CountAPI - บันทึกจำนวนเข้าชมจากทุกคนจริง) -----
+        async function updateVisitorCount() {
+            try {
+                // ใช้ namespace "uttayancamp" เพื่อไม่ให้ชนกับเว็บอื่น
+                const apiUrl = 'https://api.countapi.xyz/hit/uttayancamp2026/visitors';
+                const response = await fetch(apiUrl);
+                const data = await response.json();
+                const count = data.value;
+                const counterSpan = document.getElementById('visitorCounter');
+                if (counterSpan) {
+                    counterSpan.innerText = `ผู้เข้าชมเว็บไซต์นี้ทั้งหมด: ${count} คน`;
+                }
+            } catch (error) {
+                console.error("ไม่สามารถโหลดจำนวนผู้เข้าชมได้:", error);
+                const counterSpan = document.getElementById('visitorCounter');
+                if (counterSpan) {
+                    counterSpan.innerText = `ผู้เข้าชมเว็บไซต์นี้: โหลดไม่สำเร็จ`;
+                }
             }
         }
         updateVisitorCount();
